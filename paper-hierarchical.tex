@@ -1,0 +1,646 @@
+%------------------------------------------------------------------------------
+% Template file for the submission of papers to IUCr journals in LaTeX2e
+% using the iucr document class
+% Copyright 1999-2013 International Union of Crystallography
+% Version 1.6 (28 March 2013)
+%------------------------------------------------------------------------------
+
+\documentclass{iucr}              % DO NOT DELETE THIS LINE
+% \documentclass[preprint]{iucr}              % DO NOT DELETE THIS LINE
+
+\usepackage{epsfig,color}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+
+
+% \documentclass[a4paper,10pt]{article}
+% \usepackage[utf8]{inputenc}
+% \usepackage[]{graphicx}
+% \usepackage{rotating}
+% \usepackage{hyperref}
+% \usepackage{amsmath} 
+% \usepackage{color}
+% \usepackage{listings}
+% \usepackage{lscape}
+% \usepackage{float}
+% \usepackage{verbatim}
+
+% \usepackage{subcaption}
+% \usepackage{multirow}
+
+
+\def\ave#1{{\langle #1\rangle}}
+\def\half{{1\over 2}}
+
+\newcommand{\refeq}[1]{Eq.~\ref{#1}}
+\newcommand{\refpic}[1]{Fig.~\ref{#1}}
+\newcommand{\todo}[1]{{\color{red}[TODO: "#1'']}}
+\newcommand{\reftable}[1]{Table.~\ref{#1}}
+\newcommand{\inblue}[1]{{\color{blue}#1}}
+\newcommand{\inred}[1]{{\color{red}#1}}
+\newcommand{\ingreen}[1]{{\color{green}#1}}
+
+\DeclareMathOperator{\sinc}{sinc}
+% \lstset{language=Python,
+%         keywordstyle=\color{blue}\textbf,
+% 	commentstyle=\color[rgb]{0.133,0.545,0.133},
+% 	stringstyle=\color[rgb]{0.627,0.126,0.941},
+% 	breaklines=true,
+% 	showstringspaces=false,
+% 	frame=trBL, basicstyle=\scriptsize %\small %\tiny %\footnotesize
+%        }
+
+
+
+
+     %-------------------------------------------------------------------------
+     % Information about journal to which submitted
+     %-------------------------------------------------------------------------
+     \journalcode{S}              % Indicate the journal to which submitted
+                                  %   A - Acta Crystallographica Section A
+                                  %   B - Acta Crystallographica Section B
+                                  %   C - Acta Crystallographica Section C
+                                  %   D - Acta Crystallographica Section D
+                                  %   E - Acta Crystallographica Section E
+                                  %   F - Acta Crystallographica Section F
+                                  %   J - Journal of Applied Crystallography
+                                  %   M - IUCrJ
+                                  %   S - Journal of Synchrotron Radiation
+
+\begin{document}                  % DO NOT DELETE THIS LINE
+
+     %-------------------------------------------------------------------------
+     % The introductory (header) part of the paper
+     %-------------------------------------------------------------------------
+
+     % The title of the paper. Use \shorttitle to indicate an abbreviated title
+     % for use in running heads (you will need to uncomment it).
+
+\title{A hierarchical approach for modelling X-ray beamlines. Application to a coherent beamline.}
+
+     % Authors' names and addresses. Use \cauthor for the main (contact) author.
+     % Use \author for all other authors. Use \aff for authors' affiliations.
+     % Use lower-case letters in square brackets to link authors to their
+     % affiliations; if there is only one affiliation address, remove the [a].
+
+\cauthor[a]{Manuel}{Sanchez del Rio}{srio@esrf.eu}{}
+\author[a]{Rafael}{Celestre} %{address if different from \aff}
+\author[a]{Mark}{Glass} %{address if different from \aff}
+\author[a]{Giovanni}{Pirro} %{address if different from \aff}
+\author[a]{Juan}{Reyes Herrera} %{address if different from \aff}
+\author[a]{Ray}{Barrett} %{address if different from \aff}
+\author[a]{Julio Cesar}{da Silva} %{address if different from \aff}
+\author[a]{Peter}{Cloetens} %{address if different from \aff}
+\author[b]{Xianbo}{Shi}
+\author[b]{Luca}{Rebuffi}
+
+
+\aff[a]{ESRF, 71 Avenue des Martyrs, 38043 Grenoble \country{France}}
+\aff[b]{Argonne National Laboratory, 9700 South Cass Avenue, Lemont, Illinois 60439, \country{USA}}
+
+
+     % Use \shortauthor to indicate an abbreviated author list for use in
+     % running heads (you will need to uncomment it).
+
+%\shortauthor{Soape, Author and Doe}
+
+     % Use \vita if required to give biographical details (for authors of
+     % invited review papers only). Uncomment it.
+
+%\vita{Author's biography}
+
+     % Keywords (required for Journal of Synchrotron Radiation only)
+     % Use the \keyword macro for each word or phrase, e.g. 
+     \keyword{Beamline}\keyword{simulations}
+
+%\keyword{keyword}
+
+     % PDB and NDB reference codes for structures referenced in the article and
+     % deposited with the Protein Data Bank and Nucleic Acids Database (Acta
+     % Crystallographica Section D). Repeat for each separate structure e.g
+     % \PDBref[dethiobiotin synthetase]{1byi} \NDBref[d(G$_4$CGC$_4$)]{ad0002}
+
+%\PDBref[optional name]{refcode}
+%\NDBref[optional name]{refcode}
+
+
+\maketitle                        % DO NOT DELETE THIS LINE
+
+\begin{synopsis}
+A hierarchical scheme of the calculations of an X-ray beamline for coherent applications is presented. Starting from simple calculations to partial coherence calculations, we show how ray tracing and wave optics software are applied simulating the beamline performances.   
+\end{synopsis}
+
+\begin{abstract}
+This paper shows different approaches to simulate a modern X-ray beamline. It considers different methodologies with 
+increasing complexity as it goes from simple hand-calculations to the most sophisticated available computer simulations based on both ray tracing and waveoptics techniques. A last generation nanofocusing beamline for coherent x-ray applications has been chosen (ID16A at the ESRF) to study in detail the issues 
+related to highly demagnifying sychroton sources and exploiting the beam coherence. The performance of the beamline is studied for two storages rings: the old ESRF (emittance 4000 pm) and the new ESRF-EBS (emittance 150 pm). This document gives results in term of flux, intensity distribution, focal size, and partial coherence properties using different software tools. The different algorithms and methodologies are discussed with emphasis in benefits and limitations of each one. 
+\end{abstract}
+
+
+     
+\section{Introduction}
+
+\todo{To be written... 1) Introduction to nanofocus and coherent applications 2) ID16a 3) methods and contents 4) OASYS}
+
+ %-------------------------------------------------------------------------
+ % Manuel & Rafael
+ %-------------------------------------------------------------------------
+
+\section{Beamline description}
+
+This section presents the reader with the main operational parameters for the ID16A beamline at ESRF. This beamline was built during the Upgrade Phase I at ESRF in \inred{2011??}. It uses one or several undulators as source. During the period 2011-2018 it worked exploiting the ESRF storage ring’s double-bend achromat (DBA) lattice with horizontal emittance about 4000 pm. The replacement of this lattice by a new hybrid multi-bend achromat (HMBA) lattice is being achieved in the ESRF Upgrade Phase II. This new lattice will drastically improve the performances of the ESRF source. The result, the Extreme Brilliant Source (EBS) \cite{ESRF2014} will increase the brightness and coherent fraction by a factor of more than 100, by strongly reducing the horizontal emittance. This is possible using almost the same ring circunference and electron energy $E_e$. As as result, the x-ray sources will be much coherent, specially in the horizontal direction. How this important improvement will afeect a particular beamline is analyzed in this paper. 
+
+ID16A \cite{ID16A} is a bemline that provides a nanometric, highly coherent, pink beam. It is dedicated to nanofocusing applications. \todo{please summarize some use and application}. The beamline usually operates at three fixed photon energies: 11200 eV, 17225 eV and 33600 eV. The straight section in the magnet lattice holds three undulators: an in-vacuum undulator of $\lambda_u=26$~mm period, and two other conventional undulators of 18 and 22.4 mm period. The undulator parameters and $K$-values at the resonances for the energies in use are shown in Table \ref{tab:Undulators}. 
+
+\begin{table}\label{tab:Undulators}
+\centering
+\caption{Parameters of the undulators available at the ID16A beamline: period ($\lambda_u$), length ($L$), number of identical undulators ($N$) and deflection parameter ($K$) values for the three main photon energies in use. The valuse are shown for the two ESRF magnetic lattices: the old one (labelled ESRF, with $E_e = 6.04$ GeV) and the new one (EBS, with $E_e = 6.00$ GeV). $n$ is the emission harmonic in use for each particular photon energy.}
+
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccccc}
+name  & $\lambda_u$ [mm] & $L$ [m] & N & $K$ (11200 eV) & $K$ (17225 eV) & $K$ (33600 eV) \\ 
+\input{tableUndulator.txt}
+%      & IVU26 & 26.00           & 2.50    & 1      & 0.616 (n=1)    & 1.625 (n=3)    & 0.616 (n=3)    \\
+% ESRF & U18.3 & 18.30           & 1.40    & 2      & 1.715 (n=1)    & 0.445 (n=1)    & 1.715 (n=3)    \\
+%      & U22.4 & 22.40           & 1.40    & 1      & 0.873 (n=1)    & 1.840 (n=1)    & 0.873 (n=1)    \\ \hline
+%      & IVU26 & 26.00           & 2.50    & 1      & 0.590 (n=1)    & 1.606 (n=1)    & 0.590 (n=3)    \\
+% EBS  & U18.3 & 18.30           & 1.40    & 2      & 1.156 (n=1)    & 0.411 (n=1)    & 1.156 (n=1)    \\
+%      & U22.4 & 22.40           & 1.40    & 1      & 0.852 (n=1)    & 1.821 (n=3)    & 0.852 (n=1)    \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+ID16A is a long beamline (the distance from the center of the straight section to the sample position is 185 m). A strong focusing is performed with a Kirkpatrick-Baez (KB) set of mirrors placed very close (a few cm) upstream the sample position (focal plane), which ensures a high demagnification. In order to match the acceptance of the KB in the vertical and horizontal planes a focusing multilayer monochromator (ML) has
+been chosen. It i) monochromatises the beam with a large energy bandwidth (typically $\Delta E/E \approx 10^{-2}$) to allow high (pink) flux, 
+and ii) creates a secondary secondary source in horizontal plane 40 m downstream from the undulator, where a horizontal slit (VSS, virtual source slit) is placed. A beamline schematic is shown in Figure~\ref{fig:ID16A}. The positions of the different elements are shown in Table \ref{tab:Positions}. This table also shows the extremely high geometrical demagnification ($\sim 10^3$) needed for focusing the beam to the nanometric range.  
+
+\begin{figure}\label{fig:ID16A}
+    \centering
+    \includegraphics[width=0.9\textwidth,clip=true,trim=50 85 50 85]{GRAPHICS/ID16A.pdf}
+    \caption{Schematic of the ID16A beamline showing the horizontal (top) and vertical (bottom) planes and the position of the main optical elements. In the sketch ML stands for the focusing multilayer monochromator; VSS for virtual source slit; and KB for the Kirkpatrick-Baez set of mirrors. The sketch is drawn out of scale.}
+\end{figure}
+
+
+\begin{table}\label{tab:Positions}
+    \caption{Position of the main ID16A optical elements with respect to the source (undulator centre). It also shows the values for horizontal and vertical demagnification $M^{-1}=p/q$, where $p$ and $q$ are the the distances object-optics and optics-image, respectively.}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{rcccccc}
+    -                      & Source & Multilayer & Slit  & KB (v) & KB (h) & Focal plane \\ 
+    Position {[}m{]}:      & 0.00   & 28.30      & 40.00 & 184.90 & 184.95 & 185.00      \\
+    Horizontal $M^{-1}$:   & -      & 2.42       & -     & -      & 2899   & -           \\
+    Vertical $M^{-1}$:     & -      & -          & -     & \inblue{1849}   & -      & -           \\ 
+    \end{tabular}%
+    }%
+\end{table}
+
+
+Simulations were done using the two different storage ring lattices mentioned before: the (present) ESRF DBA where the undulators are in a high-$\beta$ straight section (larger horizontal emittance) and the new EBS (lower horizontal emittance) straight sections. The parameters for the current and the new lattice are shown in Tables \ref{tab:TableSources} and \ref{tab:eBeam}.
+
+\begin{table}\label{tab:TableSources}
+    \caption{ESRF and ESRF-EBS main storage ring parameters. Main parameters of the present DBA lattice (ESRF) and futurue HMBA lattice (EBS) storage rings \cite{ESRF2014}.}
+        \begin{tabular}{rcc}
+                                              & \textbf{ESRF} & \textbf{EBS}      \\ 
+        Lattice type:                         & DBA           & HMBA              \\
+        Circunference {[}m{]}:                & 844.930       & 843.979           \\
+        Beam energy {[}GeV{]}:                & 6.04          & 6.00              \\
+        Beam current {[}mA{]}:                & 200           & 200               \\
+        Natural emittance {[}pm$\cdot$rad{]}: & 4000          & 147               \\
+        Energy spread {[}$\%${]}:             & 0.0011        & 0.00093           \\       
+    \end{tabular}
+\end{table}
+
+\begin{table}\label{tab:eBeam}
+    \centering
+    \caption{ESRF and EBS main electron beam parameters. Electron beam parameters for the high-$\beta$ (ESRF) and the EBS straight sections. Values taken at the symmetry point of the straight section, where the insertion devices are placed. Values fir ESRF are taken from \cite{ESRF2014}. For EBS, two (very close) design values are used, from Ref.~\cite{ESRF2014} labelled EBS-S28A, and those coming from further lattice refinement, labelled EBS-S28D. \todo{Remove ESRF-AT?? Check again} }
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{ccccc}
+         Lattice & $\sigma_e$ horizontal {[}$\mu$m{]} &  $\sigma_e'$ horizontal {[}$\mu$rad{]} & $\sigma_e$ vertical {[}$\mu$m{]} & $\sigma_e'$ vertical {[}$\mu$rad{]} \\
+         \input{tableElectron.txt}
+
+%    \begin{tabular}{rcc}
+%                                                & \textbf{ESRF (high-$\beta$)} & \textbf{EBS}     \\ 
+%         $\sigma_e$ horizontal {[}$\mu$m{]}:    & 415.00                      & 30.20             \\
+%         $\sigma_e'$ horizontal {[}$\mu$rad{]}: & 10.30                       & 4.40              \\
+%         $\sigma_e$ vertical {[}$\mu$m{]}:      & 3.40                        & 3.60              \\
+%         $\sigma_e'$ vertical {[}$\mu$rad{]}:   & 1.20                        & 1.40              \\ 
+    \end{tabular}
+    }
+\end{table}
+
+\section{Simulations}
+
+For all simulations presented hereafter, we selected the configuration using a single undulator U18.3 placed in the center of the straight section and tuned to its first harmonic at a photon energy of $E=17225$ eV (Table \ref{tab:Undulators}). This section is devided in three lain subsections, that present three main levels of simulations: simple calculations that can be made by hand (section \ref{level0}), ray-tracing simulations (section \ref{level1}) and wave optics simulations (section \ref{level2}).   
+
+\subsection{Calculations ``by hand''}
+\label{level0}
+
+We first estimate the beam size at different positions at the beamline, in particular at the source plane and at the image plane. A first na{\"{i}}ve estimation of the focal size can be done by considering the source size times the magnification factor $M$. In the paraxial approximation, the magnification factor can be expressed as $M=q/p$, where $p$ is the distance between object and imaging element and $q$ is the distance between imaging element and image. The demagnification is defined, then, as the inverse of the magnification ratio: $M^{-1}=p/q$. Systems where $M>1$ are said to be magnifying, whereas systems with $M<1$ (or $M^{-1}>1$) are said to be demagnifyng. The latter will be our case, thus is mor comfortable to work with demagnification (>1) rather than magnification. 
+
+The source size is usually approximated as the convolution of the electron sizes (Table \ref{tab:eBeam}) with undulator natural source size (zero emittance) \cite{elleaume}. Let $\sigma_{e(h,v)}$ and $\sigma_{e(h,v)}'$ be the electron beam size and divergence at a centre of the symmetry of the straight section. The subscripts $h$ and $v$ stand for horizontal and vertical, respectively. The undulator natural source size and divergence are given by:
+\begin{align}
+    \label{eq:photon small sigmas}
+    \sigma_u\approx\frac{2.74}{4\pi}\sqrt{\lambda L} && \sigma_u'\approx0.69\sqrt{\frac{\lambda}{L}},
+\end{align}
+where $\lambda$ is the emitted wavelength and $L=N\lambda_u$ is the undulator length, with $\lambda_u$ as the magnetic period of the undulator and $N$, the number of magnetic periods. The electron beam usually presents different horizontal and vertical beam emittances, but the undulator natural source size or divergence presents radial symmetry at the central cone (excluding polarization). The photon source size and divergence are given by:
+\begin{align}
+\label{eq:photon big sigmas}
+\Sigma_{h,v}=\sqrt{\sigma_{e(h,v)}^2 + \sigma_u^2} && \Sigma_{h,v}'=\sqrt{\sigma_{e(h,v)}'^2 + \sigma_u'^2}.
+\end{align}
+
+% $\Sigma$ is given by the convolution of the electron beam size and the undulator natural source size or equivalently, single electron source size \cite{elleaume}: a storage ring with low emittance will produce small photon source size. It is also convenient to define two other relationships: the first one relates the magnetic field $B$ in an undulator to a dimensionless parameter $K$, the deflection parameter: $K = 93.4\lambda_u[\text{m}]\text{B}[\text{T}]$. The second relationship shows the wavelengths at which the emitted spectral intensity os peaked, or resonance. It is a function of $K$; the harmonic number n; the Lorentz factor $\gamma$ and the observation angle $\phi$:
+% \begin{align}
+%     \lambda=\frac{\lambda_u}{2\text{n}\gamma^2}\Big(1+\frac{K^2}{2}+\gamma^2\phi^2\Big).
+% \end{align}
+% The first term is the relativistic contracted wavelength, the second term is the magnetic tuning and the last term is the off-axis wavelength increase \cite{elleaume}.
+
+The focal sizes were estimated, in a first approximation, by multiplying the photon source size by the magnification factors. For predicting the photon beam footprint downstream the beamline and to be able to estimate the needed dimensions of the optical elements to accept the whole beam, it is important to be able to calculate the beam divergence. In an ideal {\'{e}}tendue preserving optical system, the resulting beam divergence transforms inversely as the beam size: it can be calculated as the product between the beam divergence at the source with the demagnification factor $M^{-1}$.
+
+Using the values for U18.3, $n$=1, and  $E=17225$ eV (Table \ref{tab:Undulators}), one obtains the photon source sizes and divergences shown in Table~\ref{tab:HandCalculations}. The focal size would be 139$\times$5 nm$^2$ (H$\times$V) for ESRF and 10$\times$5 nm$^2$ for EBS. The focal spot for ESRF is too large in horizontal for the demandes beamline specification, therefore the VSS could be closed to 50$\mu$m thus reducing the beamsize at the VSS plane by a factor ca. 8 \inred{$\approx$ 403.8/50=8.076}. Therefore the horizontal size at the sample will be affected by the same factor obtaining roughly 17$\times$5 nm$^2$
+
+In general, for grazing incident optics with large demagnifications ($M^{-1} \gg 100$) imaging extended sources, the effect of optical aberrations is very important even using a perfect optical surface that focus point-to-point. As a consequence, the results calculated using only the demagnification factor are usually too optimistic. Moreover imperfections in the optical surface (figure errors, slope errors and microroughness) are often the limiting factors of the real reflective optics. Their effect will studied in Sections~\ref{level1} and \ref{level2}. The smearing of the focal size because of diffractive effects by the mirror clipping will also be discussed. 
+
+\begin{table}\label{tab:HandCalculations}
+    \centering
+    \caption{Photon beam size and divergence for selected ID16A beamline positions. Values below were obtained considering undulator U18.3 tuned to its first harmonic at the photon energy of $E=17225$ eV for both the high-$\beta$ (ESRF) and the EBS straight sections. Values are FWHM. Values in parentheses corresponds to closing the VSS slit to 50$\mu$m (21.3 if approximating by the Gaussian $\sigma$).}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{r|ccc|ccc}
+                            &               & \textbf{ESRF (high-$\beta$)} &   &         & \textbf{EBS}  &    \\ 
+    Element:                & Undulator     & VSS          & Sample            & Undulator & VVS   & Sample       \\
+    Position [m]:           & 0.00          & 40.00        & 185.00            & 0.00    & 40.00   & 185.00       \\
+    $FWHM_h$ [$\mu$m]:      & 977.19        & 404.00 (50.0)& 0.139 (0.017)     & 71.26   & 29.46   & 0.0102       \\
+    $FWHM_v$ [$\mu$m]:      & 9.60          & 482          & 0.0052            & 10.02   & 486.5   & 0.0054       \\
+    \newline
+    $FWHM'_h$ [$\mu$rad]:   & 26.96         & \inred{65.22?}        & 189062   & 15.60   & 37.74   & 109404       \\
+    $FWHM'_v$ [$\mu$rad]:   & 12.04         & 12.04                 & 22264    & 12.16   & 12.16   & 22489        \\                                                   
+    \end{tabular}%
+    }
+\end{table}
+
+The next step would be to estimate the number of photons at the sample. For that, we have to know the spectrum at the source. It is not straightforward to get this information ``by hand'' but one can calculate the flux and power using different codes. Perhaps the most performant and well maintained codes spread in the synchrotron community are SPECTRA \cite{codeSPECTRA} and SRW \cite{codeSRW}. In this paper, we use the OASYS suite \cite{codeOASYS} that implements in its XOPPY add-on three codes: US\cite{codeUS}, URGENT: \cite{codeUS} and SRW \cite{codeSRW}. Figure~\ref{fig:FluxU18} shows the spectra for two slit apertures calculated with SRW. The spectrum is calculated over an aperture opened to fully accept the central cone at the resonance peak of the harmonic in use. placed at d=27.1. An aperture size of $S_h=S_v=4$mm  because it is much larger than the Full Width at Half Maximum (FWHM) of the central cone at $d$, that is $\max(\Sigma') d$, with any possible value of $\Sigma'$ in Table~\ref{tab:HandCalculations}. The peak intensity is about  $3.5\cdot10^{14}$ photons/s/0.1{\%}bw (see \ref{fig:FluxU18}). The corresponding spectral peak is very wide and depends mostly on the aperture so it does not change when reducing emittance (from high-$\beta$ (ESRF) to EBS). For smaller apertures (1~mm) the emittance plays an important role in both peak width and peak amplitude. The number of photons at the source at photon energy of 17225 eV \inred{(3.5 $10^{14}$ /17.225 photons/s/eV)} has to be multiplied by the bandpass of the monochromator at that energy \inred{(17225 $10^{-2}$)}, thus resulting $N_{ML}$=3.5 $10^{15}$ photons/s. 
+
+\begin{figure}\label{fig:FluxU18}
+    \centering
+    \includegraphics[width=0.8\textwidth]{GRAPHICS/fluxU18.jpg}
+    \caption{Flux of the U18.3 undulator integrated over a square slit placed at 27.1~m from the ID centre with aperture of 1 and 4 mm.}
+\end{figure}
+
+Now we have to consider which optical element crop the beam removing photons. This can be analyzed using their angular acceptance or numerical aperture. The multilayer monochromator accepts the whole beam. We consider a VSS closed to $S_h=50 \mu$m in horizontal and fully opened in vertical. For ESRF its transmittivity is 1/8 (as discussed before) and 1 for EBS. In a similar way, the KB mirrors will crop the beam to a size that is the projection of their length to a direction perpendicular to the optical axis. Using mirror length of 60 mm and 26 mm for VFM and HFM, respectively, and incident angle of 15 mrad mrad, the KB is behaving like an aperture of $900 \times 390 \mu m^2$. Dividing this by the distance from the mirror to the VSS in H and to the source in V we get N.A. of6.2$\times$21.6 $mu$rad. Dividing by the beam divergence we have the new transmittivity coefficients 9.5\% (H) and 0.18\% (V)for ESRF and 16.3\% and 0.18\% for EBS. The overall transmission is therefore 0.2\% for ESRF and 2.95\% for EBS, therefore 7.53 $10^{12}$ photons for ESRF and 1.03 $10^{14}$ photons for EBS. \todo{check with referente 6 $10^9$ at 33.6 keV}
+
+One can also discuss some simple consequences about the beam coherence. The coherence fraction $CF$ \cite{arxivCF} of the undulator beam is the occupation of the first coherence mode, as it will be discussed in Section~\ref{level2}. An approximated estimation of it can be obtained using Eqs.~\ref{eq:photon small sigmas} and \ref{eq:photon big sigmas}, for the horizontal and vertical planes we have have
+\begin{equation}
+ CF_{(h,v)} = \frac{\sigma_u \sigma'_u}{\Sigma_{(h,v)} \Sigma'_{(h,v)}},
+\end{equation}
+and the total coherent fraction is the product of both ($CF=CF_h \times CF_v$). An estimation of the CF calculated in such a mode gived CF=0.XX\% for the ESRF and XXX for EBS. The CF roughly indicates the ration of the ``coherent photons'' over the total number of photons. A the beamline optics of a beamline target for coherence application must therefore clean the beam to extract only the good coherent photons. A complete cleaning is impossible as there is spatial overlapping of the different coherence modes. However, apertures centered at the optical axis would make the work. If we compare the values transmittivity of the beamline due to geometrical clipping  (0.2\% for ESRF and 2.95\% for EBS) we find them very close to the $CF$ values, meaning that the resulting beam would be highly coherent. 
+
+Regarding coherence, one can idealize the beamline in two parts: the ML onochromator and VSS that will prepare a coherent plane wave, as the source is very far from the sample position, and then KB that acts as a focusing element (focal=cm) that also crops the beam like it would be done by a square aperture of $D \times D=$ 400$\times$400 $\mu m^2$ \inred{(we obtained 900 in H, that will be reduced by 0.5 as propagated from 10 cm to 5 cm upstrem from the sample, and 390 in V approximated by 400)}. This aperture has two effects: i) removing a lot of off-axis photons what imply a increase of the coherent fraction to a situation close to a coherent source, and ii) make a broadening of the focal spot because of coherent diffraction. We know from optics that the diffraction by a square aperture of a collapsing spherical wavefront has an intensity distribution of:
+\begin{equation}
+ I(x,y,z=f) = \frac{4 k^2 D^2}{\pi^2 f^2} \sinc^2\frac{k D x}{2 f} \sinc^2\frac{k D y}{2 f}
+\end{equation}
+where $k=2\pi/\lambda$ . Considering that the FWHM of $\sinc(x)$ is approximately 2.78, one obtains a FWHM of 7.75$\times$7.75 nm$^2$ nm for the focal spot. This spot size is of the order or smaller than the one obtained by geometrical considerations, therefore one can say that this beamline for the conditions in use is a diffraction limited beamline. 
+
+
+In summary, we show in this section how simple analytical calculations that can be done in its major part ``by hand'' help to estimate the geometrical beam size at focal position (XX$\times$XX nm$^2$) the flux (XX photons/s) and also anticipate that the beam is highly coherent producing a diffraction limited focal spot of  7.75$\times$7.75 nm$^2$. We ignored at this point the effect of real optics including surface errors, the reflectivity of the elements, and other aspects that will be treated in depth in the next sections. This is, however, the first step to be done when analyzing a beamline. A similar work was done at the design level in order to define the working parameters.   
+
+
+
+
+ %-------------------------------------------------------------------------
+ % Manuel
+ %-------------------------------------------------------------------------
+\subsection{Ray tracing calculations}
+\label{level1}
+
+In this section we perform ray tracing calculations to study the effect of real optics (including aberrations and slope errors) to the beam size and beamline transmittivity. The first subsection deals with the effect of aberrations and transmittivity due to geometrical considerations. The second subsection shows how the effect of slopes erroin the KB mirrors deteriorate the focal spot.  
+
+Ray tracing is a simulation method based on tracing some light rays along the optical system from the source to the image and retrieve the beam characteristics at the image (manily size and divergences). For simple systems one can perform ray tracing by hand, selecting some principal rays that will define the location and envelope of the image. Using computers one can trace thousands of rays and calculate the position and divergence distribution of the rays using statistics. Rays are usually generated by Monte Carlo sampling the source characteristics. Ray tracing is based on geometrical optics: a ray is a solution of the Helmholtz equation and travels in vacuum along straight line. Rays are intercepted by the optical elements, which change their trajectory. For reflectors, this change of direction is given by the specular reflection laws. For refractors, the change of direction os defined by the Snell law. Because Snell law uses the refraction index which is wavelength-dependent, it is then interetisting to add additional parameters to each ray, such as the wavelength. This will permit to calculate the refraction index that has to be used by each ray. The information of each ray can also be extended to include some intensity, or better electric field amplitude. This allows to extend the pure geometrical tracing to include physical models that take into account the optical element reflectivity or transmittivity. For mirrors and lenses one should use the Fresnel's equations for reflection and transmission to affect the ray intensity. This combination of using a geometrical model plus a physical model allows to simulate every element used in a synchrotron beamline, such as mirrors and combination of them (e.g., KBs); lenses, CRLs and transfocators; gratings of any type and shape (plane, VLS), crystal systems, etc. It makes ray tracing a simple and extremely powerful technique for calculating the main characteristics of the photon beam (size, divergence, photon distribution) at every point of the beamline. Although very powerful commercial ray tracing packages are available in the market, they are not suitable for synchrotron simulations because they do not cover the particularities of X-ray devices and sources. For that purposes, several packages created in the synchrotron community and are available, like SHADOW \cite{codeSHADOW}, RAY \cite{codeRAY}, McXtrace \cite{codeMCXTRACE} or XRT \cite{codeXRT}. SHADOW is probably the one that is more used and cited. We use SHADOW and its interface ShadowOUI \cite{codeSHADOWOUI}, available as a module of the OASYS suite.
+
+
+% When analyzing an optical system producing an extremely high demagnification of the source one can think in several limiting factors that could affect the focal sizes calculated by hand in Table~\ref{tab:HandCalculations}. 
+
+% \inred{REMOVE!!
+% One limiting factor is that the system under consideration is not an {\it imaging system} so an intensity distribution at the source (e.g., a Gaussian distribution) is not necessary imaged into a the same distribution (Gaussian). To test that, we implemented the beamline as three ideal lenses, each of them representing an optical element: ML, KBV and KBH. Ray tracing simulation show that, indeed, the demagnified image of a Gaussian source by ideal lenses shows a vertical distribution that is not Gaussian (see Fig.~\ref{fig:ray tracing ideal elements}a ). The FWHM is not close to what is expected theoretically because of the high numerical aperture. The finite acceptance of the optical surfaces and apertures makes possible a significant reduction of the aberrations. The price to pay is of course a large reduction of the intensity. Defining the multilayer and mirror acceptances as slits right before the ideal focusing elements, we obtain the image sizes shown in Fig.~\ref{fig:ray tracing ideal elements}b. Here, the image dimensions are importantly reduced in horizontal for the ESRF-High$\beta$ because of a great cut in beam dimensions due to the effect of the 50$\mu$m VSS slit and KB acceptance. It can also be seen the complete absence of the tails also due to the effect of beam cut by the apertures.
+% }
+
+We performed ray tracing using the elliptical reflectors with finite dimensions as focusing elements. The reflector shape is chosen to be elliptical as this is the theoretical shape producing a point-to-point focusing. For a first calculation  the elliptical elliptical reflectors are considered perfect, and have no slope errors. 
+The results in Fig.~\ref{fig:ray tracing}a show two facts. One is that the migration from ESRF lattice to the EBS will significantly improve the horizontal size, and the VSS is not needed. Secontly, one can observe a much larger luminosity in the EBS case. The transimittivity values are 0.165\% for ESRF and 2.28\% for EBS. These values confirm what we calculated by hand (0.2\% for ESRF and and 2.95\% for EBS). As mentioned before, these values are similar to the coherent fraction \cite{coherentfraction} (0.13 and 2.8\%, respectively), meaning that a very high coherence of the beam is expected, therefore some degradation of the beam by clipping the beam by apertures and element acceptance is expected. 
+
+% Moreover, the treatment of the slope errors cannot be done without considerent effects of coherence, as discussed in \cite{hybrid}. This will be discussed in the next sections. 
+
+
+
+\begin{figure}
+\label{fig:ray tracing}
+\centering
+% \includegraphics[width=0.45\textwidth]{GRAPHICS/ideallensESRF.png}
+% \includegraphics[width=0.45\textwidth]{GRAPHICS/ideallensEBS.png}
+% 
+% \includegraphics[width=0.45\textwidth]{GRAPHICS/ideallensaperturesESRF.png}
+% \includegraphics[width=0.45\textwidth]{GRAPHICS/ideallensaperturesEBS.png}
+
+\includegraphics[width=0.45\textwidth]{GRAPHICS/idealelementsESRF.png}
+\includegraphics[width=0.45\textwidth]{GRAPHICS/idealelementsEBS.png}
+
+\includegraphics[width=0.45\textwidth]{GRAPHICS/hybridnoerrorsESRF.png}
+\includegraphics[width=0.45\textwidth]{GRAPHICS/hybridnoerrorsEBS.png}
+
+\includegraphics[width=0.45\textwidth]{GRAPHICS/hybriderrorsESRF.png}
+\includegraphics[width=0.45\textwidth]{GRAPHICS/hybriderrorsEBS.png}
+
+\caption{Image produced by different types of ideal focusing for the ESRF (leftcolumn) and EBS (right column). The source with parameters in 
+\ref{tab:HandCalculations}. 
+The first row has been calculated using the elliptical reflectors (both for ML and KBs) but without slope errors. The focal beam dimensions are written in the plot title.
+The second row shows the image calculated the hybrid option (ray tracing plus coherent diffraction) with elliptical reflecting surfaces. It shows the focal spot degradiation duw to the diffraction originated by cropping the beam by the KM mirrors. The calculation in the bottom row also include slope errors using the real mirror profiles measures at the ESRF metrology lab. It can be shown a further degradation and the growing of satellite structures in the vertical intensity distribution. 
+}
+\end{figure}
+
+
+The HYBRID method \cite{hybrid} uses geometric ray tracing combined with wavefront propagation. The code computes diffraction effects when the beam is clipped by an aperture or by the finite size of the optics and can also simulate the effect of mirror figure errors when diffraction is present. The method can be applied to an entire beamline by simulating each optical element iteratively under the hypothesis of the validity of far field propagation in all intermediate propagations. If this is not the case, a near field version is available for investigating imaging by individual optics. The interest of the hybrid method is to assess in a fast way the influence of beam coherence because the code is considerably faster than the the full methods for dealing with the partial coherence of the synchrotron beam that are described below. Fig.~\ref{fig:ray tracing}b presents the results using the hybrid model for the beamline with ideal elliptical optical surfaces. When compared with the pure ray tracing in Fig.~\ref{fig:ray tracing}a it can be appreciated that the spot is broadened. This is more evident in the vertical direction, because the smaller focal size. The spot size is about 7-8 nm in V for both storage ring lattices, and in horizontal is about 15$\mu$m for ESRF-High$\beta$ and 11 nm for EBS. It is interesting to note the almost round spot that will be obtained with the new EBS lattice. 
+
+The surface finish of the optical elements is another limiting effect for determining the size and intensity of the beam at the image position. It is possible to infere the effect of mirror imperfections and in particular slope errors by only knowing some statistical parameters such as the slope error Root Mean Squate (RMS) and then building synthetic surface profiles to be used in the simulations. This is the typical mode to operate when designing a new beamline where the mirrors do not exist yet. However, in our case the mirrors already exist and have been extensively characterize at the ESRF metrology laboratory. It is therefore highly recommended to use metrology data from real mirrors, when possible. When not available, one can use data from existing mirrors from a database (e.g., \cite{dabam}) and extrapolate some of the effects to the hypothetical new mirrors. The metrology data of the mirrors for the beamline under study are presented in \todo{Appendix 1}. These experimental data are used in all the simulations in this paper. Simulations using the hybrid model including slopes errors are shown in Fig.~\ref{fig:ray tracing}c. It can be observed a small broadening of the peak due to slope errors, but, more importantly, a new satellite structure close to the vertical intensity peak is produced by the slope errors. \todo{may be play with slope errors and use synthetic profiles to show the importance of the low frequencies in the intensity distribution?}
+
+
+ %-------------------------------------------------------------------------
+ % Rafael
+ %-------------------------------------------------------------------------
+
+\subsection{Wave optics simulations}
+\label{level2}
+
+ 
+\subsubsection{Simplified wave optics simulation (coherent case in 1D with point source and ideal elements)}
+
+The characteristics of this particular beamline, a the very long length combined with a small source (in particular for EBS), makes this beamline very adapted for studied requiring coherence. Indeed, it has been shown that the clipping of the beam, mainly due to the acceptance of the KB mirrors produces a significant broadening of the focal spot.  As discussed in Section~\ref{level0}, very simple calculation of the diffraction limit can be sone using a convergent spherical beam clipped by a slit of 400$\times$400$ \mu$m$^2$ placed at 5cm upstream the focus (at the second KB mirror position). The slit vertical size corresponds roughly to the horizontal acceptance of the seconf KB mirror, and it is approximately the same in vertical. A simple simulation of diffraction by a square slit using OASYS is shown in Fig.~\ref{wofry400um}. It reveals a spot of less than 10 nm, thus confirming the analytical predictions, and qualifying this beamline to be a diffraction limited beamline.  
+
+\begin{figure}
+\label{wofry400um}
+\centering
+\includegraphics[width=4.25cm]{GRAPHICS/wofry400umslit.png}
+\includegraphics[width=4.25cm]{GRAPHICS/wofry400umprofile.png}
+\caption{Diffraction spot producedof a spherical wavefront (R=-50mm) by a 400x}
+\end{figure}
+
+The first step in the wave optics simulation is to assume a full coherent source and simulate the propagation of such wavefront through the beamline
+The wavefront simulation of the beamline include propagation of the beam from element to element (drift spaces) using different possible propagators. Usually a propagator based on the Freskel-Kirchhoff integral is used, as it is valid for both near and far field. The applications of this (and other) operators imply the calculation of an integral (or sum) at each pixel of the image plane. This is costly from the computer point of view, so Fourier Transforms (Fourier Optics) are used to reduce complexity and calculation time. This is practically the only choice for simulating 2D images. The use of Fourier Transforms adds another problem: the result is very dependent on the sampling of the wavefront (i.e., pixel size, number of points, dimension of the window where the wavefront is sample). This means the usually one has to test many configurations before finding one that works reaonably well (even though one can never guarantee the complete accuracy of the sampling used). A full wavefront optics simulation is an iterative process, where the user has to refine the sampling parameters element by element to be sure the wavefront at each position is sampled correctly. This is a time consuming work for performing it with the full 2D simulation. For this reason, a wavefront calculation may be started by a simplified system, using simplified models for the source and focusing elements. Moreover, because the horizontal and vertical coupling is usually small in synchrotron beamlines, it is convinient to separate the simulation in two, one for the horizontal plane and one for the vertical one. 
+
+We perform here a simplified wavefront simulation in 1D, thus separating the simulations of the horizontal and vertical planes. The source can be simplified by using a point source (spherical wavefront) and applying a Gaussian intensity profile with $\sigma=\sigma'_u D$ with $\sigma'_u$ given by Eq.~\ref{eq:photon small sigmas} and $D$ the distance from the point source to the observation plane. Each optical element can be simplified by separating its action in two parts: the focusing behaviour implemented as an ideal lens, and the finite size because of the boundaries, implemented as a slit. The WOFRY package in OASYS permits to do this work in a quick way, and it is possible to arrive to a satisfactory result in a few iterations. The beam size at different positions of the beamline are shown in Table~\ref{tablewofry1D}. The final image profiles are in Fig.~\ref{wofry1D}.
+
+\begin{table}[]
+    \centering
+    \caption{Beam sizes calculated with simplified wave optics propagation (point source and ideal lenses with aperture for modeling the element dimensions). \todo{implement a sort of multielectron system - implement the slope error} }
+    \label{tablewofry1D}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{cccccc} 
+    Element:                & ML            & VSS          & KBv               & KBh           & sample        \\
+    Position [m]:           & 28.3          & 40.00        & 184.90            & 184.95        & 185.00        \\
+    H beam size [$\mu$m]:   & 328           & 1.11         & 4084              & 390           & 0.010         \\
+    V beam size [$\mu$m]:   & 328           & 466          & 899               & 450           & 0.010         \\ 
+    H scaling factor:       & 1.0           & 0.01         & 220               & 1             & 0.00002       \\
+    V scaling factor:       & 1.0           & 0.64         & 5                 & 0.5           & 0.00002       \\
+    \end{tabular}%
+    }
+\end{table}
+
+\begin{figure}
+\label{wofry1D}
+\centering
+\includegraphics[width=4.25cm]{GRAPHICS/wofry1Dh.png}
+\includegraphics[width=4.25cm]{GRAPHICS/wofry1Dv.png}
+\caption{Intensity distribution at the focal position in horizontal plane (left) and in vertical plane (right).}
+\end{figure}
+
+
+\subsubsection{Full wave optics simulation for coherent case}
+% The reduction on the electron beam emittance, by reducing the electron beam horizontal size, leads to an increase on the horizontal lateral coherence of the radiation emitted by an undulator in the symmetry point of a straight section \cite{paper}. Incoherent simulation methods may be insufficient for a full assessment of the beamline design. To accurately account for coherence effects, one has to resort to wave optics simulations (commonly referred to as wave propagation).
+% 
+The first step in the wave optics simulation is to assume a full coherent source and simulate the propagation of such wavefront through the beamline. The source used on the simulations to follow is the on-axis-single-electron emission from the U18.3 undulator tuned to its first harmonic at $E=17225$ eV, which is inherently fully coherent. Once the source is defined, one has to go around on how to simulate the beamline optical elements. Increasing the complexity of the simulations one can: a) use ideal thin lenses preceded by slits to emulate finite aperture; or b) use grazing incidence focusing optics models \cite{Canestrari2014}. On the top of that, one can add the effect of imperfect optics to the simulations, i.e. slope errors. 
+
+The computer code chosen for these calculations is the \textsc{srw} \cite{codeSRW}, which over the past two decades has been extensively benchmarked throughout different synchrotron radiation facilities and has become widely accepted within the X-ray community.
+
+Figure \ref{fig:SingleElectron} shows the horizontal integrated intensity at the focal position for the ID16A. It can been seen that there is little difference between using thin ideal lenses or the elliptical mirror model, confirming the previous ray-tracing results. The elliptical mirror presents a slight reduction in intensity and asymmetry but no significant difference is found, which is in accordance with what is reported in \cite{Canestrari2014}. Notica that the differences are minimal and have to be observed in log plots. It is also important to mention that this equivalency between ideal lenses and elliptical mirrors is only valid at the focal position vicinity: down- or upstream the focal position, differences are not negligible \cite{Canestrari2014}. 
+
+It is also possible to add slope errors to the simulations to study the degradation on the focal spot quality (Fig.~\ref{fig:SingleElectron}). For that, the available available metrology data (Appendix 1) are used. For both cases (i.e., simulating the beamline using thin optical elements or elliptical mirrors), the beam sizes at the focal position are little affected by the presence of the slope errors (see Table \ref{tab:SRW_results}). There is a increase in the background level: the radiation that should be on the main lobe (focus) goes to the side lobes as a result of adding the slope errors. This is accompanied by an obvious reduction on the peak intensity. Table \ref{tab:SRW_results} compiles the beam sizes at focal position for mentioned simulations.
+
+\begin{figure}
+    \centering
+        \includegraphics[width=4.25cm]{GRAPHICS/se_idealTE_idealOE_h.pdf}
+        \includegraphics[width=4.25cm]{GRAPHICS/ebs_slopeTE_slopeOE_h.pdf}
+    \label{fig:SingleElectron}
+    \caption{Wavefront propagation from a single electron emission through the ID16A beamline. }
+    %Simulations took less than one minute in a desktop computer Intel Core i7 with 8Gb of RAM memory.}
+\end{figure}
+
+
+\begin{table}\label{tab:SRW_results}
+\centering
+\caption{Beam dimensions (FWHM) at the focal position for different models of focusing elements.}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ccccc}
+Focusing elements                 & Plane      &  Single electron & EBS         & ESRF       \\
+ideal lenses/ elliptical mirrors  & Horizontal &  7.94/7.97       & 12.20/12.70 & 17.50/16.80 \\
+the same, with errors             & Horizontal &  9.35/10.50       & 12.90/13.65 & 17.70/17.03 \\
+ideal lenses/ elliptical mirrors  & Vertical   &  7.11/7.26       & 8.40/9.02   & 8.24/8.77    \\
+the same, with errors             & Vertical   &  7.44/8.46       & 8.66/9.87   & 8.52/9.66    \\                                                                 
+\end{tabular}
+}
+\end{table}
+
+
+\subsubsection{Full wave optics simulation: partial coherent case by means of multielectron Monta Carlo sampling}
+The wavefront propagation methodology is based in the sampling of a single wavefront (monochromatic and coherent) in a 2D space (in horizontal and vertical spatial dimensions) at a given point of the beamline. This initial point considered as source cannot be the source physical position, because i) when condidering point or spherical waves all the intensity would come in a single pixel so the wavefront is ill-defined, ii) when using synchrotron sources (i.e., undulators) theory \cite{jackson} permits the calculation of the radiation in positions far from the electron trajectory. The limitation of the method is that one wavefront is not representative for a beam that, in storage rings, is produced by the emission of many electrons circulating through the corresponding magnet structure. Diffraction limited sources would emit radiation that can be described in good approximation by a single wavefront. But even for new ultra low-emittance storage rings (improperly called diffraction-limited sources, see discussion in \cite{coherentfraction}) the contribution of the electron dimensions ($\sigma_{e(h,v)}$ and $\sigma'_{e(h,v)}$) is not negligeable as compared with the natural emission of radiation ($\sigma_u$ and $\sigma'_u$ for undulators as in Eq.~\ref{eq:photon small sigmas}). To account for this effect one should complete or extend the wavefront simulations to take into account that in fact not only a single wavefront contributes to the properties of the beam. There are three approaches currently used: 1) use of convolutions, 2) Monte Carlo multi-electron sampling, and 3) Propagation of coherent modes. The convolution method consist in calculating the emission characteristics and then convolve the resulting intensity with Gaussians describing the electron beam. This method is simple and fast, as only requires simulation of a single wavefront. However, it presents two important limitations: i) it can only be applied to the intensity calculations and not to other parameters of interest for describing coherence, such as degree of coherence, etc., and ii) it can be applied only at the source position: it is usually unknown how the different optical elements will affect the source contribution to the phase space. The next method, the Monte Carlo multi-electron propagation, it is an statistical method based on the idea that one can exactly calculate the emission and its propagation for one electron that is deterministically described by its initial conditions at the entrance of the magnetic structure. It is therefore possible to perform many simulations for different initial conditions of the travelling electron and make the propagation along the beamline until the observation plane. Then one can statistically combine the different wavefronts (one for each electron) to obtain a sampling of the intensity and other magnitudes useful to describe partially coherent beams. This method presents two difficulties. One is convergence. One cannot know a priori how many electrons must be sampled to obtain a given level of accuracy. The second is computing resources. The emission of each electron must be calculated at the source level, propagated along every element of the beamline, and the resulting wavefront must be analyzed to extract the information to be scored and stored. The third method, the propagation of coherent modes wil be discussed in the next section. 
+
+The Monte Carlo multielectron method has been proposed by O. Chubar and it is fullt implemented in SRW \cite{codeSRW}. We have used this code for the calculations presented in this section.  
+
+\begin{figure}
+    \centering
+        \includegraphics[width=4.25cm]{GRAPHICS/esrf_idealTE_idealOE_h.pdf}
+        \includegraphics[width=4.25cm]{GRAPHICS/esrf_slopeTE_slopeOE_h.pdf}
+    \label{fig:FiniteEmittanceA}
+    \caption{Wavefront propagation from the ESRF magnetic lattice through the ID16A beamline.}
+\end{figure}
+
+\begin{figure}
+    \centering
+        \includegraphics[width=4.25cm]{GRAPHICS/ebs_idealTE_idealOE_h.pdf}
+        \includegraphics[width=4.25cm]{GRAPHICS/ebs_slopeTE_slopeOE_h.pdf}
+    \label{fig:FiniteEmittanceB}
+    \caption{Wavefront propagation from the EBS magnetic lattice through the ID16A beamline.}
+\end{figure}
+
+
+The source used for simulations is the U18.3 undulator tuned to its first harmonic at $E=17225$ eV with a finite emittance electron beam (see Table \ref{tab:eBeam}). Two set of parameters were used for the electron beam: the current machine parameters at the ESRF (high-$\beta$) and the EBS straight sections (Tables \ref{tab:TableSources} and \ref{tab:eBeam}). 
+
+Simulations for both storage ring lattices were carried out modelling the beamline using thin ideal lenses and elliptical mirror models with and without the addition of the slope errors. Results are presented in Figures \ref{fig:FiniteEmittanceA} and \ref{fig:FiniteEmittanceB}; and Table \ref{tab:SRW_results}.
+
+The same observations made on the previous section (full coherent simulations) are pertinent here: there is a reduction on peak intensity when comparing single lens model with the elliptical mirror. The beam sizes and shapes are similar at the focal position, only. Simulations took significantly longer to be completed: few hours on a 56-core computer cluster.
+
+
+% 
+% Synchrotron radiation on the hard X-rays regime is hardly full coherent even for the so-called diffraction limited sources (see Table \ref{tab:Coherence}). To better describe the nature of the emitted radiation, one makes use of the partial coherent simulations using the \textsc{srw}, i.e. incoherent addition of the intensity from the emission from electrons sampled from the source's 6D phase-space \cite{Chubar2011b}. This is a natural extension from the method presented on the previous section.
+
+
+% 
+% \newpage
+% 
+%  %-------------------------------------------------------------------------
+%  % Manuel (?)
+%  %-------------------------------------------------------------------------
+%  
+\subsubsection{Full Wave optics simulation: partial coherence case by means of coherent mode decomposition}
+% 
+% One of the mentioned drawbacks of the Monte Carlo multielectron methods is the a-priori unability to determine the size of sampling space (i.e., how many electrons) for accurate calculations. 
+% Another important limitation is the impossibility with available computer resources to store (although can be computed) the full 4D matrices fully describing the partial coherence properties (cross spectral density) at any point of the beamline. 
+
+The cross spectral density (CSD) (sometimes called mutual intensity) defines the correlation of the radiated electric fields between two spatial points $(x_1,y_1)$ and $(x_2,y_2)$ at a given position of the beamline $z$:
+
+\begin{equation}
+W(x_1,y_1,x_2,y_2;z,\omega) = <E*(x_1,y_1; z,\omega) E(x_2,y_2;z,\omega)>
+\label{CSD}
+\end{equation}
+where $E$ is the amplitude of the electric field, $\omega$ is the radiation frequency, and $<>$ stands for the ensemble average. The CSD is at the origin of any other information aboute the coherence of the beam, like the spectral density $S$ (or, just intensity): 
+\begin{equation}
+S(x,y,;z,\omega) = W(x,y,x,y,;z,\omega)
+\end{equation}
+or the spectral degree of coherence $\mu$:
+\begin{equation}
+\mu(x_1,y_1,x_2,y_2;z,\omega) = \frac{W(x_1,y_1,x_2,y_2;z,\omega)}{\sqrt{ S(x_1,y_1;z,\omega) S(x_3,y_2;z,\omega}}
+\end{equation}
+that measures the coherence of the beam, from fully incoherent ($\mu=0$) to fully coherent ($\mu$=1). 
+Eq.~\ref{CSD} can in principle be calculated using the Kim's convolution theorem \cite{kim1986} (see \cite{geloni2008} for a full discussion on the validity) but its storage is prohibitif in present computers: supposing sampling one spatial dimension by $N\approx1000$ pixels, a wavefront will contain $N^2$ pizels, and the CSD will be sampled over $N^4$ points. They are complex numbers (16 bits) so the only stockage is of the order of GB or TB. Considering also that the progagation of $W$ from a beamline position $z_1$ to another position $z_2$ will need 10$^8$ to 10$^{12}$ 4D integrals, one can easily imagine the physical impossibility to perform such calculations. It is interesting to remark that although Monte Carlo multielectron method can in principle calculate Eq.~\ref{CSD} the storage at every point is unmanagleable, so usually only some 'cuts' of the CSD are stored, such as $W(x_1,0,x_2,0;z,\omega)$ (horizontal) or $W(0,y_1,0,y_2;z,\omega)$ (vertical).
+
+A solution of this problem is the expansion of the CSD in coherent modes \cite{mandel_wolf}:  
+\begin{equation}
+ W(x_1,y_1,x_2,y_2;z,\omega) = \sum\limits_{m=0}^{\infty} \lambda_m \Phi_m^{*}(x_1,y_1;z,\omega) \Phi_m(x_2,y_2;z,\omega)
+\label{decomposition}
+ \end{equation}
+where $\lambda_m$ are the eigenvalues or weights, and $\Phi_m$ are the eigenfunctions or coherent modes. 
+
+A theoretical study and a numerical algorithm for the coherent mode decomposition of undulator emission in storage rings has been recently proposed  \cite{GlassThesis,GlassEPL} and implemented in the computer package COMSYL \cite{codeCOMSYL}. The innovative concept is the numerical description of the undulator CSD in terms of its coherent modes $\Phi_m(x,y;z,\omega)$ and eigenvalues $\lambda_m $. One can define the mode distribution as: 
+\begin{equation}
+ d_m = \frac{\lambda_m}{\sum\limits_{i=0}^{\infty} \lambda_i}
+\end{equation}
+or the cumulated mode distribution as: 
+\begin{equation}
+ c_m = \sum\limits_{i=0}^{m} d_i
+\end{equation}
+An important property of this coherent mode decomposition is that it optimizes the representation of the CSD when the series is truncated. In other words, truncating the series in Eq.~\ref{decomposition} up to the term $m$, the CSD obtained approximates better the exact CSD (this with infinite terms) than any other expansion. It also imply that the first term is more important than the second, and so on. The first term (index zero) is the first coherent mode. It relative importance with respect to the full CSD permits to define the coherent fraction (CF) as the occupation of the firts coherence mode: CF=$d_0$. Obviously, a pretty coherent source will require less modes than a mostly incoherent source to arrive up to a certain representation of the CSD.
+
+We performed COMSYL calculations for the U18.3 undulator radiation of ID16A of 1.4 m length using both the EBS and ESRF-High$\beta$ lattices. The obtained CF are 2.8\% for EBS and 0.13\% for ESRF-High$\beta$, indicating that the overall coherent flux emitted by EBS will be about 20 times the existing coherent flux with ESRF-High$\beta$. Fig.~\ref{histomodes}a shows the cumulated occupation of the coherent modes for the full central cone undulator emission. It can be shown how much less number of coherent modes are needed to arrive to a certain degree of cumulated occupation for EBS than for ESRF-High$\beta$. This can also be shown in Fig.\ref{histomodes}b where the number of modes to fill 50\%, 75\% and 95\% CSD occupation are compared.   
+
+The coherence fraction of 2.8\% for the EBS source means that for an optimal coherence experiment one should remove 97.2\% of the emitted photons. This task is performed by the beamline. The beamline elements modify the different modesin a different manner. The fist coherence mode is always centered on-axis, and the subsequent ones expand in the space until completely filling the spectral density.   
+\begin{figure}
+    \centering
+        \includegraphics[width=7cm]{GRAPHICS/cumulated_occupation.eps}
+        \includegraphics[width=6.5cm]{GRAPHICS/up_to_mode_id16a.eps}
+    \label{histomodes}
+    \caption{Cumulated occupation of the coherent modes for the EBS and ESRF-High-$\beta$ (top), and number of modes needed to reach a given percent of CSD occupation (bottom). }
+\end{figure}
+
+
+\begin{figure}
+    \centering
+        \includegraphics[width=\textwidth]{GRAPHICS/ebs_spectral_density.png}
+        \includegraphics[width=0.45\textwidth]{GRAPHICS/ebs_mode0.png}
+        \includegraphics[width=0.45\textwidth]{GRAPHICS/ebs_mode1.png}
+        \includegraphics[width=0.45\textwidth]{GRAPHICS/ebs_mode2.png}
+        \includegraphics[width=0.45\textwidth]{GRAPHICS/ebs_mode3.png}
+    \label{spectraldensity}
+    \caption{XXXX }
+\end{figure}
+
+
+The coherent modes for the EBS have been propagated using a beamline simplified with ideal focusing elements and slits to determine their numerical aperture. Fig.~\ref{fig:mode transmission} shows how the intensity of the first modes is reduced by geometrical considerations. We recall that in the coherent mode expansion, the modes are orthonormal, therefore the integrated intensity for any mode is always one at the source. Different modes will be ``cut'' in a different manner, depending on the slits cropping effect. Fig.~\ref{fig:mode transmission} shows that the lowest mode (zeroth order) transfer is about 25\%, the mode 2 has a 10\% transfer and the 4th mode about 6\%. The other modes have less than 5\% transfer and modes higher than 10 practically do not contribute to the final spectral density. Note that the transmission os mode 2 is higher than mode 1. This is because the mode 3 has its highest intensity at the origin, but mode 2 has a hole in the middle, as shown in Fig. XX. Modes with maximum intensity at origin will be transmitted more than the others. This analysis of the mode transmission is mode dramatic if one looks to the total intensity in the mode, which is given by the eigenvalue. Neglecting modes higher than 10, the intensity transmitted for the source mode zero amounts for 49.5\%, 18.4\% for the mode 2 less than 5\% for the others. As commented before, the source modes cropped by the beamline elements are not longer orthonormal, therefore they are not longer coherent modes of the resulting beam. The new coherent modes can be calculated applying a new coherent mode decomposition on the resulting spectral density. Making this numerical calculation with COMSYL, one obtains a mode occupation spectrum where the lowest mode accounts for the 83\% of the total spectral density (see Fig.~\ref{fig: rediagonalization}). This analysis confirms the quatitative predictions discussed in the previous sections, but give a quantitative figure of the coherence of the beam. 
+
+
+
+% #########################################################
+%            iteration            intensity         intensity/I0   intensity/TotalInt
+%                    0               0.23967               1.00000              0.44091 
+%                    1              0.022004               0.09181              0.04048 
+%                    2               0.10008               0.41757              0.18411 
+%                    3              0.028309               0.11812              0.05208 
+%                    4              0.061262               0.25561              0.11270 
+%                    5              0.026262               0.10958              0.04831 
+%                    6               0.03452               0.14403              0.06351 
+%                    7               0.01459               0.06087              0.02684 
+%                    8              0.011714               0.04887              0.02155 
+%                    9             0.0051714               0.02158              0.00951 
+
+% #########################################################
+%            iteration            intensity         intensity/I0   intensity/TotalInt
+%                    0            1.0793e+06               1.00000              0.49537 
+%                    1                 93290               0.08644              0.04282 
+%                    2            3.9938e+05               0.37004              0.18331 
+%                    3            1.0632e+05               0.09851              0.04880 
+%                    4            2.1648e+05               0.20058              0.09936 
+%                    5                 87305               0.08089              0.04007 
+%                    6            1.0794e+05               0.10001              0.04954 
+%                    7                 42906               0.03975              0.01969 
+%                    8                 32393               0.03001              0.01487 
+%                    9                 13446               0.01246              0.00617 
+  
+
+
+\begin{figure}\label{fig:mode transmission}
+    \centering
+        \includegraphics[width=\textwidth]{GRAPHICS/mode_transmission.png}
+    
+    \caption{Transmission of the different modes due to geometrical efffects.}
+\end{figure}
+
+
+
+
+\begin{figure}\label{fig:rediagonalization}
+    \centering
+        \includegraphics[width=\textwidth]{GRAPHICS/rediagonalization.png}
+    
+    \caption{Occupation of the coherent modes in the final focused beam.}
+\end{figure}
+
+\begin{figure}\label{fig:final modes}
+    \centering
+        \includegraphics[width=0.45\textwidth]{GRAPHICS/final_mode0.png}
+        \includegraphics[width=0.45\textwidth]{GRAPHICS/final_mode1.png}
+    \caption{Coherent modes of the focused beam}
+\end{figure}
+
+
+\todo{
+\begin{itemize}
+ \item propagate modes
+ \item calculate coherent fraction at the focal position
+ \item show some modes
+ \item create some plots with cuts of W
+\end{itemize}
+}
+ 
+
+\section{Discussion} 
+
+\todo{
+\begin{itemize}
+ \item comment on the heat-load deformation 
+ \item comment the effect of reflectivity by ML and mirror coating
+ \item comment on the main results in terms of intensity and size
+ \item EXPERIMENTAL RESULTS?
+ \item comment ``where to stop'' in a simulation, depending on the level of accuracy requested
+ \item comment on the computer resources used for simulations
+ \item comment on software tools: OASYS (and make a graphic)
+ \item discuss the particularities of this beamline 
+ \item comment on general strategy for beamline simulations and the application of the shown hierarchical model. Make a flowchart
+\end{itemize}
+}
+
+ %-------------------------------------------------------------------------
+ % Manuel & Rafael
+ %-------------------------------------------------------------------------
+\section{Summary}
+
+Bla bla
+
+
+\bibliography{paper-hierarchical}
+\bibliographystyle{iucr}
+
+\end{document}                    % DO NOT DELETE THIS LINE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
