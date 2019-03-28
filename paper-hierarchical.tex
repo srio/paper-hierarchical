@@ -149,7 +149,7 @@ For illustrating the applicability of a battery of methods and solutions for bea
 X-ray beamlines are very particular optical systems. Some implications of exploiting low wavelengths such as the necessity of using grazing incidence reflectors and the use of perfect crystals as typical hard x-ray monochromators make useless, or at least incomplete, the application of common commercial software packages for the study of synchrotron beamlines. For this reason many optics tools have been developed by the synchrotron community. Some of them have a long history like SHADOW (more than 40 years old) or SRW (almost 30), for mentioning only codes used in this work. These historical tools together with new tools designed ad-hoc packages have been agglutinated in a user friendly software OASYS. Many of the calculations presented here have been performed directly in OASYS or with script created with the help of OASYS. 
 
 
-The paper is structures as follows: we first introduce in Section~\ref{Beamline description} the main parameters of the beamline and make the selection of the particular choice of the parameters used in the calculations. Section~\label{Simulations} is the central part of the paper, and describe the different methods used to analyse the beamline with increasing complexity, setting a hierarchy of methodologies that can be exported to the simulations of any beamline. In subsection \ref{level0} we calculate with simple methods approximated values of focal size, flux and coherent fraction. Then accuracy is improved using geometrical methods in subsection \ref{level1} that give reasonable results as far as some corrections are considered because of the  mentioned characteristics of high demagnification and high coherence of the studied beamline. The wave optics section~]ref{level2} also include different models whose complexity increases when the results expected are more and mode demanding. The simulations methods are presented in a hierarchical approach:  they provide more and better results but the price to pay is to deal with more complex and computationally expensive tools. 
+The paper is structures as follows: we first introduce in Section~\ref{Beamline description} the main parameters of the beamline and make the selection of the particular choice of the parameters used in the calculations. Section~\label{Simulations} is the central part of the paper, and describe the different methods used to analyse the beamline with increasing complexity, setting a hierarchy of methodologies that can be exported to the simulations of any beamline. In Section \ref{level0} we calculate with simple methods approximated values of focal size, flux and coherent fraction. Then accuracy is improved using geometrical methods in Section \ref{level1} that give reasonable results as far as some corrections are considered because of the  mentioned characteristics of high demagnification and high coherence of the studied beamline. The wave optics section~]ref{level2} also include different models whose complexity increases when the results expected are more and mode demanding. The simulations methods are presented in a hierarchical approach:  they provide more and better results but the price to pay is to deal with more complex and computationally expensive tools. 
 
  %-------------------------------------------------------------------------
  % Manuel & Rafael
@@ -361,7 +361,7 @@ The second row shows the image calculated the hybrid option (ray tracing plus co
 
 The HYBRID method \cite{hybrid} uses geometric ray tracing combined with wavefront propagation. The code computes diffraction effects when the beam is clipped by an aperture or by the finite size of the optics and can also simulate the effect of mirror figure errors when diffraction is present. The method can be applied to an entire beamline by simulating each optical element iteratively under the hypothesis of the validity of far field propagation in all intermediate propagations. If this is not the case, a near field version is available for investigating imaging by individual optics. The interest of the hybrid method is to assess in a fast way the influence of beam coherence because the code is considerably faster than the the full methods for dealing with the partial coherence of the synchrotron beam that are described below. Fig.~\ref{fig:ray tracing}b presents the results using the hybrid model for the beamline with ideal elliptical optical surfaces. When compared with the pure ray tracing in Fig.~\ref{fig:ray tracing}a it can be appreciated that the spot is broadened. This is more evident in the vertical direction, because the smaller focal size. The spot size is about 7-8 nm in V for both storage ring lattices, and in horizontal is about 15$\mu$m for ESRF-High$\beta$ and 11 nm for EBS. It is interesting to note the almost round spot that will be obtained with the new EBS lattice. 
 
-The surface finish of the optical elements is another limiting effect for determining the size and intensity of the beam at the image position. It is possible to infere the effect of mirror imperfections and in particular slope errors by only knowing some statistical parameters such as the slope error Root Mean Squate (RMS) and then building synthetic surface profiles to be used in the simulations. This is the typical mode to operate when designing a new beamline where the mirrors do not exist yet. However, in our case the mirrors already exist and have been extensively characterize at the ESRF metrology laboratory. It is therefore highly recommended to use metrology data from real mirrors, when possible. When not available, one can use data from existing mirrors from a database (e.g., \cite{dabam}) and extrapolate some of the effects to the hypothetical new mirrors. The metrology data of the mirrors for the beamline under study are presented in \todo{Appendix 1}. These experimental data are used in all the simulations in this paper. Simulations using the hybrid model including slopes errors are shown in Fig.~\ref{fig:ray tracing}c. It can be observed a small broadening of the peak due to slope errors, but, more importantly, a new satellite structure close to the vertical intensity peak is produced by the slope errors. 
+The surface finish of the optical elements is another limiting effect for determining the size and intensity of the beam at the image position. It is possible to infere the effect of mirror imperfections and in particular slope errors by only knowing some statistical parameters such as the slope error Root Mean Square (RMS) and then building synthetic surface profiles to be used in the simulations. This is the typical mode to operate when designing a new beamline where the mirrors do not exist yet. However, in our case the mirrors already exist and have been extensively characterize at the ESRF metrology laboratory. It is therefore highly recommended to use metrology data from real mirrors, when possible. When not available, one can use data from existing mirrors from a database (e.g., \cite{dabam}) and extrapolate some of the effects to the hypothetical new mirrors. The metrology data of the mirrors for the beamline under study are presented in \todo{Appendix 1}. These experimental data are used in all the simulations in this paper. Simulations using the hybrid model including slopes errors are shown in Fig.~\ref{fig:ray tracing}c. It can be observed a small broadening of the peak due to slope errors, but, more importantly, a new satellite structure close to the vertical intensity peak is produced by the slope errors. 
 
 \todo{
 \begin{itemize}
@@ -384,7 +384,7 @@ In this section the coherence properties of the beamline are analysed using, aga
 \subsubsection{Simplified wave optics simulation (coherent case in 1D with point source and ideal elements)}
 \label{wofry}
 
-The very long distance source-sample combined with a small source (in particular for EBS) makes this beamline very adapted for studied requiring coherence. Indeed, it has been shown that the clipping of the beam, mainly due to the acceptance of the KB mirrors produces a significant broadening of the focal spot.  As discussed in Section~\ref{level0}, very simple calculation of the diffraction limit can be sone using a convergent spherical beam clipped by a slit of 400$\times$400$ \mu$m$^2$ placed at 5cm upstream the focus (at the second KB mirror position). The slit vertical size corresponds roughly to the horizontal acceptance of the seconf KB mirror, and it is approximately the same in vertical. A simple simulation of diffraction by a square slit using OASYS is shown in Fig.~\ref{wofry400um}. It reveals a spot of less than 10 nm, thus confirming the analytical predictions, and qualifying this beamline to be a diffraction limited beamline.  
+The very long distance source-sample combined with a small source (in particular for EBS) makes this beamline suitable for experimental techniques requiring a highly coherent beam. Indeed, it has been shown that the clipping of the beam, mainly due to the acceptance of the KB mirrors produces a significant broadening of the focal spot.  As discussed in Section~\ref{level0}, very simple calculation of the diffraction limit can be sone using a convergent spherical beam clipped by a slit of 400$\times$400$ \mu$m$^2$ placed at 5cm upstream the focus (at the second KB mirror position). The slit vertical size corresponds roughly to the horizontal acceptance of the seconf KB mirror, and it is approximately the same in vertical. A simple simulation of diffraction by a square slit using OASYS is shown in Fig.~\ref{wofry400um}. It reveals a spot of less than 10 nm, thus confirming the analytical predictions, and qualifying this beamline to be a diffraction limited beamline.  
 
 \begin{figure}
 \label{wofry400um}
@@ -466,7 +466,7 @@ the same, with errors             & Vertical   &  7.44/8.46       & 8.66/9.87   
 \label{srw_me}
 The wavefront propagation methodology is based in the sampling of a single wavefront (monochromatic and coherent) in a 2D space (in horizontal and vertical spatial dimensions) at a given point of the beamline. This initial point considered as source cannot be the source physical position, because i) when condidering point or spherical waves all the intensity would come in a single pixel so the wavefront is ill-defined, ii) when using synchrotron sources (i.e., undulators) theory \cite{jackson} permits the calculation of the radiation in positions far from the electron trajectory. The limitation of the method is that one wavefront is not representative for a beam that, in storage rings, is produced by the emission of many electrons circulating through the corresponding magnet structure. Diffraction limited sources would emit radiation that can be described in good approximation by a single wavefront. But even for new ultra low-emittance storage rings (improperly called diffraction-limited sources, see discussion in \cite{coherentfraction}) the contribution of the electron dimensions ($\sigma_{e(h,v)}$ and $\sigma'_{e(h,v)}$) is not negligeable as compared with the natural emission of radiation ($\sigma_u$ and $\sigma'_u$ for undulators as in Eq.~\ref{eq:photon small sigmas}). To account for this effect one should complete or extend the wavefront simulations to take into account that in fact not only a single wavefront contributes to the properties of the beam. There are three approaches currently used: 1) use of convolutions, 2) Monte Carlo multi-electron sampling, and 3) Propagation of coherent modes. The convolution method consist in calculating the emission characteristics and then convolve the resulting intensity with Gaussians describing the electron beam. This method is simple and fast, as only requires simulation of a single wavefront. However, it presents two important limitations: i) it can only be applied to the intensity calculations and not to other parameters of interest for describing coherence, such as degree of coherence, etc., and ii) it can be applied only at the source position: it is usually unknown how the different optical elements will affect the source contribution to the phase space. The next method, the Monte Carlo multi-electron propagation, it is an statistical method based on the idea that one can exactly calculate the emission and its propagation for one electron that is deterministically described by its initial conditions at the entrance of the magnetic structure. It is therefore possible to perform many simulations for different initial conditions of the travelling electron and make the propagation along the beamline until the observation plane. Then one can statistically combine the different wavefronts (one for each electron) to obtain a sampling of the intensity and other magnitudes useful to describe partially coherent beams. This method presents two difficulties. One is convergence. One cannot know a priori how many electrons must be sampled to obtain a given level of accuracy. The second is computing resources. The emission of each electron must be calculated at the source level, propagated along every element of the beamline, and the resulting wavefront must be analyzed to extract the information to be scored and stored. The third method, the propagation of coherent modes wil be discussed in the next section. 
 
-The Monte Carlo multielectron method has been proposed by O. Chubar and it is fullt implemented in SRW \cite{codeSRW}. We have used this code for the calculations presented in this section.  
+The Monte Carlo multielectron method has been proposed by O. Chubar and it is fully implemented in SRW \cite{codeSRW}. We have used this code for the calculations presented in this section.  
 
 \begin{figure}
     \centering
@@ -526,9 +526,8 @@ that measures the coherence of the beam, from fully incoherent ($\mu=0$) to full
 Eq.~\ref{CSD} can in principle be calculated using the Kim's convolution theorem \cite{kim1986} (see \cite{geloni2008} for a full discussion on the validity) but its storage is prohibitif in present computers: supposing sampling one spatial dimension by $N\approx1000$ pixels, a wavefront will contain $N^2$ pizels, and the CSD will be sampled over $N^4$ points. They are complex numbers (16 bits) so the only stockage is of the order of GB or TB. Considering also that the progagation of $W$ from a beamline position $z_1$ to another position $z_2$ will need 10$^8$ to 10$^{12}$ 4D integrals, one can easily imagine the physical impossibility to perform such calculations. 
 
 A solution to this problem is the expansion of the CSD in coherent modes \cite{mandel_wolf}:  
-\begin{equation}
+\begin{equation}\label{decomposition}
  W(x_1,y_1,x_2,y_2;z,\omega) = \sum\limits_{m=0}^{\infty} \lambda_m \Phi_m^{*}(x_1,y_1;z,\omega) \Phi_m(x_2,y_2;z,\omega)
-\label{decomposition}
  \end{equation}
 where $\lambda_m$ are the eigenvalues or weights, and $\Phi_m$ are the eigenfunctions or (orthonormal) coherent modes. 
 
@@ -544,13 +543,25 @@ An important property of the coherent mode decomposition is that it optimizes th
 
 We performed COMSYL calculations for the U18.3 undulator radiation of ID16A of 1.4 m length using both the EBS and ESRF-High$\beta$ lattices. The obtained CF are 2.8\% for EBS and 0.13\% for ESRF-High$\beta$, indicating that the overall coherent flux emitted by EBS will be about 20 times the existing coherent flux with ESRF-High$\beta$. Fig.~\ref{fig:histomodes}a shows the cumulated occupation of the coherent modes for the full central cone undulator emission. It shows that the EBS cumulated occupation grows very steply with the number of coherent modes, whereas for ESRF the number of coherent modes needed to attain a given value of cumulated occupation much higher. This can also be shown in Fig.\ref{fig:histomodes}b, where the number of modes to fill 50\%, 75\% and 95\% of spectral density are compared for EBS and ESRF.   
 
-The coherence fraction of 2.8\% for the EBS source means that for an optimal coherence experiment one should remove 97.2\% of the emitted photons. This task is performed by the beamline. The beamline elements modify the different modes in a different manner. The fist coherence mode is always centered on-axis, and the subsequent ones expand in the space until completely filling the spectral density.   
 \begin{figure}\label{fig:histomodes}
     \centering
         \includegraphics[width=7cm]{GRAPHICS/cumulated_occupation.eps}
         \includegraphics[width=6.5cm]{GRAPHICS/up_to_mode_id16a.eps}
     \caption{Cumulated occupation of the coherent modes for the EBS and ESRF-High-$\beta$ (top), and number of modes needed to reach a given percent of CSD occupation (bottom). }
 \end{figure}
+
+The spectral density at the EBS photon source is represented in Fig.~\ref{fig:spectraldensity}a. It shows an elliptical shape with horizontal size larger than the vertical.  The spectral density is reproduced by the addition of the coherent modes weighted by the eigenvectors (from Eq.~\ref{decomposition})
+\begin{equation}
+S(x,y) = \sum_{m=0}^{\infty} \lambda_m |\Phi_m(x,y)|^2.
+\end{equation}
+Figs.~\ref{fig:spectraldensity}b-e represent the coherent modes with $m$=0 to $m$=3. It can be shown that the first mode is centered on the axis but extends over an spatial region smaller than the spectral density. Next mode ($m$=1) contributes to extend the spectral density in horizontal, but presents zero intensity at the origin. Successive modes extend  the spectral density in horizontal, sometimes presenting a lobe centerer at zero and sometimes not (e.g., $m$=3). Modes with several lobes along the vertical will also appear, but not so often than in the horizontal, because of the elliptical shape of the spectral density. The coherent modes are orthonormal, thus verifying 
+\begin{equation}
+S(x,y) = \int_{-\infty}^{\infty} \Phi^*_m(x,y) \Phi_n(x,y)~dx~dy = \delta_{mn}
+\end{equation}
+with $\delta_{mn}$ the Kronecker delta. The coherence fraction of 2.8\% for the EBS source means that for an optimal coherence experiment one should remove 97.2\% of the emitted photons. This task is performed by the beamline. The beamline elements modify the different modes in a different manner, but it will never be possible to remove all the photons except from the lowest coherent mode, because there is an overlapping of the intensity of the lowest mode with the other ones. Therefore it is impossible to obtain a fully coherent beam that must contain only a single mode. 
+
+   
+
 
 
 \begin{figure}\label{fig:spectraldensity}
@@ -560,12 +571,23 @@ The coherence fraction of 2.8\% for the EBS source means that for an optimal coh
         \includegraphics[width=0.45\textwidth]{GRAPHICS/ebs_mode1.png}
         \includegraphics[width=0.45\textwidth]{GRAPHICS/ebs_mode2.png}
         \includegraphics[width=0.45\textwidth]{GRAPHICS/ebs_mode3.png}
-    \caption{XXXX }
+    \caption{a) Spectral density $S(x,y)$ at the source position for EBS.  }
 \end{figure}
 
 
-The coherent modes for the EBS have been propagated using a beamline simplified with ideal focusing elements and slits to determine their numerical aperture. Fig.~\ref{fig:mode transmission} shows how the intensity of the first modes is reduced by geometrical considerations. We recall that in the coherent mode expansion, the modes are orthonormal, therefore the integrated intensity for any mode is always one at the source. Different modes will be ``cut'' in a different manner, depending on the slits cropping effect. Fig.~\ref{fig:mode transmission} shows that the lowest mode (zeroth order) transfer is about 25\%, the mode 2 has a 10\% transfer and the 4th mode about 6\%. The other modes have less than 5\% transfer and modes higher than 10 practically do not contribute to the final spectral density. Note that the transmission os mode 2 is higher than mode 1. This is because the mode 3 has its highest intensity at the origin, but mode 2 has a hole in the middle, as shown in Fig. XX. Modes with maximum intensity at origin will be transmitted more than the others. This analysis of the mode transmission is mode dramatic if one looks to the total intensity in the mode, which is given by the eigenvalue. Neglecting modes higher than 10, the intensity transmitted for the source mode zero amounts for 49.5\%, 18.4\% for the mode 2 less than 5\% for the others. As commented before, the source modes cropped by the beamline elements are not longer orthonormal, therefore they are not longer coherent modes of the resulting beam. The new coherent modes can be calculated applying a new coherent mode decomposition on the resulting spectral density. Making this numerical calculation with COMSYL, one obtains a mode occupation spectrum where the lowest mode accounts for the 83\% of the total spectral density (see Fig.~\ref{fig: rediagonalization}). This analysis confirms the quatitative predictions discussed in the previous sections, but give a quantitative figure of the coherence of the beam. 
+The coherent modes for the EBS have been propagated using a beamline simplified with ideal focusing elements and slits to determine their numerical aperture (like in Section~\ref{wofry}). Fig.~\ref{fig:mode transmission} shows how the intensity of the first modes is reduced by geometrical considerations. 
+%We recall that in the coherent mode expansion, the modes are orthonormal, therefore the integrated intensity for any mode is always one at the source. 
+As discussed, coherent modes will be ``cut'' in a different manner, depending on the slits cropping effect. Fig.~\ref{fig:mode transmission} shows that the lowest mode ($m$=0) transfer is about 25\%, the mode $m$=2 has a 10\% transfer and the mode $m$=4 about 6\%. The other modes have less than 5\% transfer and modes higher than $m$=10 practically do not contribute to the final spectral density. Note that the transmission of mode $m$=2 is higher than mode $m$=1, because this one does not contain a central lobe (Fig.~\ref{fig:spactraldensity}c).  
 
+\begin{figure}\label{fig:mode transmission}
+    \centering
+        \includegraphics[width=\textwidth]{GRAPHICS/mode_transmission.png}
+    \caption{Transmission of the different modes due to geometrical effects.}
+\end{figure}
+
+This analysis of the mode transmission is mode dramatic if one looks to the total intensity in the mode, which is given by its eigenvalue. Neglecting modes higher than 10, the lowest coherent mode ($m$=0) carries the 49.5\% of the beam intensity, 18.4\% for the mode $m$=2, and less than 5\% for the others. As commented before, the coherent modes at the source, propagated and cropped by the beamline, are not longer orthonormal, therefore they cannot be called coherent modes of the resulting beam. At this point, the new coherent modes can be calculated applying a new coherent mode decomposition on the cross spectral density of the transmitted beam, that is known from source coherent mode expansion. Making this numerical calculation with COMSYL, one obtains a mode occupation spectrum (see Fig.~\ref{fig:rediagonalization}) where the lowest mode accounts for the 83\% of the total spectral density. The next mode accounts for only XX\% and the rest are practically noise. The intensity of these two modes is shown in Fig.~\ref{fig:final modes}. The first mode has dimensions of XXxXX nm$^2$ and the spectral density, that is practically given by the summ of the intensity of these two modes, is XXxXX nm$^2$.
+
+This analysis confirms the quantitative predictions discussed in the previous sections, but give a quantitative figure of the coherence of the beam, a  coherent fraction of CF=83\% that measures the "coherence purity".
 
 
 % #########################################################
@@ -595,17 +617,6 @@ The coherent modes for the EBS have been propagated using a beamline simplified 
 %                    9                 13446               0.01246              0.00617 
   
 
-
-\begin{figure}\label{fig:mode transmission}
-    \centering
-        \includegraphics[width=\textwidth]{GRAPHICS/mode_transmission.png}
-    
-    \caption{Transmission of the different modes due to geometrical efffects.}
-\end{figure}
-
-
-
-
 \begin{figure}\label{fig:rediagonalization}
     \centering
         \includegraphics[width=\textwidth]{GRAPHICS/rediagonalization.png}
@@ -623,9 +634,6 @@ The coherent modes for the EBS have been propagated using a beamline simplified 
 
 \todo{
 \begin{itemize}
- \item propagate modes
- \item calculate coherent fraction at the focal position
- \item show some modes
  \item create some plots with cuts of W
 \end{itemize}
 }
@@ -644,6 +652,8 @@ Simulations took significantly longer to be completed for the multi electron cas
 
 It is interesting to remark that although Monte Carlo multielectron method can in principle calculate Eq.~\ref{CSD} the storage at every point is unmanagleable, so usually only some 'cuts' of the CSD are stored, such as $W(x_1,0,x_2,0;z,\omega)$ (horizontal) or $W(0,y_1,0,y_2;z,\omega)$ (vertical) \todo{move this to the discussion?}.
 
+
+The fist coherence mode is always centered on-axis (see, e.g, Fig.~\ref{fig:spectraldensity}b) and will always be centered when propagated until a position where an optical element (an aperture or mirror with finite dimensions) will crop it removing part of its intensity but letting the central part to go throught. The subsequent modes will be more absorbed as they extend more. In particular the modes that do not have a central lobe will lose more intensity. 
 
 
 \todo{
