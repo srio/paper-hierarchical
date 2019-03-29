@@ -131,7 +131,7 @@ A hierarchical scheme of the calculations of an X-ray beamline for coherent appl
 \end{synopsis}
 
 \begin{abstract}
-We consider different approaches to simulate a modern X-ray beamline. Several methodologies with increasing complexity are applied to discuss the relevant parameters that quantify the beamline performances. Parameters such as flux, beam size at the image and coherence properties are obtained from simple hand-calculations to sophisticated computer simulations using ray tracing and waveoptics techniques. A last generation x-ray nanofocusing beamline for coherent  applications (ID16A at the ESRF) has been chosen  to study in detail the issues 
+We consider different approaches to simulate a modern X-ray beamline. Several methodologies with increasing complexity are applied to discuss the relevant parameters that quantify the beamline performances. Parameters such as flux, beam size at the image and coherence properties are obtained from simple analytical calculations to sophisticated computer simulations using ray tracing and waveoptics techniques. A last generation x-ray nanofocusing beamline for coherent  applications (ID16A at the ESRF) has been chosen  to study in detail the issues 
 related to highly demagnifying sychrotron sources and exploiting the beam coherence. The performance of the beamline is studied for two storages rings: the old ESRF (emittance 4000 pm) and the new ESRF-EBS (emittance 150 pm). In addition to traditional results in term of flux, intensity distribution and focal size, an innovative study on the partial coherence properties based on propagation of coherent modes is presented. The different algorithms and methodologies are implemented in the software suite OASYS \cite{codeOASYS}. They are discussed with emphasis in benefits and limitations of each one. 
 \end{abstract}
 
@@ -241,7 +241,7 @@ Simulations were done using the two different storage ring lattices mentioned be
 
 For all simulations presented hereafter, we selected the configuration using a single undulator U18.3 placed in the center of the straight section and tuned to its first harmonic at a photon energy of $E=17225$ eV (Table \ref{tab:Undulators}). This section is devided in three subsections, that present three main levels of simulations: simple calculations that can be made by hand (section \ref{level0}), ray-tracing simulations (section \ref{level1}) and wave optics simulations (section \ref{level2}).   
 
-\subsection{Calculations ``by hand''}
+\subsection{Analytical calculations}
 \label{level0}
 
 We first estimate the beam size at different positions at the beamline, in particular at the source plane and at the image plane. A first na{\"{i}}ve estimation of the focal size can be done by considering the source size times the magnification factor $M$. In the paraxial approximation, the magnification factor can be expressed as $M=q/p$, where $p$ is the distance between object and imaging element and $q$ is the distance between imaging element and image. The demagnification is the inverse of the magnification ratio: $M^{-1}=p/q$. Systems where $M>1$ are said to be magnifying, whereas systems with $M<1$ (or $M^{-1}>1$) are said to be demagnifying. The latter will be our case, thus is more convenient to work with demagnification ($M^{-1}>1$) rather than with magnification. 
@@ -286,7 +286,7 @@ In general, for grazing incident optics with large demagnifications ($M^{-1} \gg
     }
 \end{table}
 
-The next step would be to estimate the number of photons at the sample. For that, we need the spectrum at the source. It is not straightforward to get this information ``by hand'' but one can calculate the flux and power using different codes. Perhaps the most performant and well maintained codes spread in the synchrotron community are SPECTRA \cite{codeSPECTRA} and SRW \cite{codeSRW}. The XOPPY package in the OASYS suite implements three codes: US\cite{codeUS}, URGENT: \cite{codeURGENT} and SRW \cite{codeSRW}. Figure~\ref{fig:FluxU18} shows the spectra calculated over an aperture if 1 $\times$ 1 mm$^2$ placed at $d$=27.1 m. This aperture opening is set to fully accept the central cone at the resonance peak of the harmonic in use ($\max(\Sigma') \times d = 0.73$ mm), with $\Sigma'$ values from in Table~\ref{tab:HandCalculations}. The peak intensity is about  $2.9\cdot10^{14}$ photons/s/0.1{\%}bw for EBS and 1.9 10$^{14}$ for ESRF (see \ref{fig:FluxU18}). One can appreciate how the emittance plays an important role in both peak width and specially in peak amplitude. The number of photons per second after the multilayer monochromator is 2.9 10$^{14}$ for EBS and 1.9 10$^{14}$ for ESRF, considering that the energy bandwidth transmitted by a multilater monochromator is $\Delta E/E \approx 10^{-2}$ and the bandwidth in \ref{fig:FluxU18} is 10$^{-3}$, and supposing at this point ideal reflectivity (100\%) for the multilayers. 
+The next step would be to estimate the number of photons at the sample. For that, we need the spectrum at the source. It is not straightforward to get this information analytically but one can calculate the flux and power using different codes. Perhaps the most performant and well maintained codes spread in the synchrotron community are SPECTRA \cite{codeSPECTRA} and SRW \cite{codeSRW}. The XOPPY package in the OASYS suite implements three codes: US\cite{codeUS}, URGENT: \cite{codeURGENT} and SRW \cite{codeSRW}. Figure~\ref{fig:FluxU18} shows the spectra calculated over an aperture if 1 $\times$ 1 mm$^2$ placed at $d$=27.1 m. This aperture opening is set to fully accept the central cone at the resonance peak of the harmonic in use ($\max(\Sigma') \times d = 0.73$ mm), with $\Sigma'$ values from in Table~\ref{tab:HandCalculations}. The peak intensity is about  $2.9\cdot10^{14}$ photons/s/0.1{\%}bw for EBS and 1.9 10$^{14}$ for ESRF (see \ref{fig:FluxU18}). One can appreciate how the emittance plays an important role in both peak width and specially in peak amplitude. The number of photons per second after the multilayer monochromator is 2.9 10$^{14}$ for EBS and 1.9 10$^{14}$ for ESRF, considering that the energy bandwidth transmitted by a multilater monochromator is $\Delta E/E \approx 10^{-2}$ and the bandwidth in \ref{fig:FluxU18} is 10$^{-3}$, and supposing at this point ideal reflectivity (100\%) for the multilayers. 
 
 \begin{figure}\label{fig:FluxU18}
     \centering
@@ -298,7 +298,7 @@ Next we would like to estimate the geometrical transmitivity of the beamline, th
 \todo{check with references $10^9$ at 33.6 keV. I get: 1.6e+15 * 0.00295 * 0.7**3 = 1.62e+12. How closed are the slits? }
 
 One can also discuss some simple consequences about the beam coherence. The coherence fraction (CF) \cite{arxivCF} of the undulator beam is the occupation of the lowest coherent mode, as it will be discussed in Section~\ref{level2}. An approximated estimation of it can be obtained using Eqs.~\ref{eq:photon small sigmas} and \ref{eq:photon big sigmas}. The CF in its the horizontal and vertical planes are
-\begin{equation}
+\begin{equation}\label{eq:coherent fraction}
  CF_{(h,v)} = \frac{\sigma_u \sigma'_u}{\Sigma_{(h,v)} \Sigma'_{(h,v)}},
 \end{equation}
 and the total coherent fraction is the product of both (CF=CF$_h \times $CF$_v$). An estimation of the CF calculated in such a mode give CF=0.12\% for the ESRF and 2.73\% for EBS at 17 keV photon energy. The CF roughly indicates the ratio of the ``coherent photons'' over the total number of photons. It is a good indicator of the quality of a coherent beam (a fully coherent beam has CF=1 and an incoherent beam CF=0). The beamline optics acts as a ``coherence filter'' by removing the ``bad'' or ``incoherent'' photons and in consequence increasing the CF. A complete cleaning is impossible because of the spatial overlapping of the different coherence modes. However, apertures centered at the optical axis would make the work. If we compare the values transmittivity of the beamline due to geometrical clipping  (0.2\% for ESRF and 2.95\% for EBS) with the the CF values, we remark that they are very close. This implies that the beam at the focal position would be highly coherent because the fraction of the photons removed from the beam matches the CF value that quantify the fraction of ``good'' or ``coherent'' photons. 
@@ -317,7 +317,7 @@ In summary, we show in this section how simple analytical calculations that can 
 
 In this section we perform ray tracing calculations to study the effect of real optics (including aberrations and slope errors) to the beam size and beamline transmittivity. The first subsection deals with the effect of aberrations and transmittivity due to geometrical considerations. The second subsection shows how the effect of slopes errors the KB mirrors degrade the focal spot.  
 
-Ray tracing is a simulation method based on tracing some light rays along the optical system from the source to the image and retrieve the statistics of rays at the image to measure beam characteristics. For simple systems one can perform ray tracing by hand, selecting some principal rays that will define the location and envelope of the image. Using computers one can trace thousands of rays and calculate the position and divergence distribution of the rays using statistics. Rays are usually generated by Monte Carlo sampling the source characteristics. Ray tracing is based on geometrical optics: a ray is a solution of the Helmholtz equation and travels in vacuum along straight line. Rays are intercepted by the optical elements, which change their trajectory. For reflectors, this change of direction is given by the specular reflection laws. For refractors, the change of direction os defined by the Snell law. Because Snell law uses the refraction index which is wavelength-dependent, it is then interetisting to add additional parameters to each ray, such as the wavelength. This will permit to calculate the refraction index that has to be used by each ray. The information of each ray can also be extended to include some intensity, or better electric field amplitude. This allows to extend the pure geometrical tracing to include physical models that take into account the optical element reflectivity or transmittivity. This combination of using a geometrical model plus a physical model allows to simulate every element used in a synchrotron beamline, such as mirrors and combination of them (e.g., KBs); lenses, compound refractive lenses and transfocators; gratings of any type and shape, crystal systems, etc. Ray tracing is a simple and extremely powerful technique for calculating the main characteristics of the photon beam (size, divergence, photon distribution) at every point of the beamline. Although very powerful commercial ray tracing packages are available in the market, they are not suitable for synchrotron simulations because they do not cover the particularities of X-ray devices and sources. For that purposes, several packages created in the synchrotron community and are available, like SHADOW \cite{codeSHADOW}, RAY \cite{codeRAY}, McXtrace \cite{codeMCXTRACE} or XRT \cite{codeXRT}. SHADOW is probably the one that is more used and cited. We use SHADOW and its interface ShadowOUI \cite{codeSHADOWOUI}, available as a module of the OASYS suite.
+Ray tracing is a simulation method based on tracing some light rays along the optical system from the source to the image and retrieve the statistics of rays at the image to measure beam characteristics. For simple systems one can perform ray tracing even by hand, selecting some principal rays that will define the location and envelope of the image. Using computers one can trace thousands of rays and calculate the position and divergence distribution of the rays using statistics. Rays are usually generated by Monte Carlo sampling the source characteristics. Ray tracing is based on geometrical optics: a ray is a solution of the Helmholtz equation and travels in vacuum along straight line. Rays are intercepted by the optical elements, which change their trajectory. For reflectors, this change of direction is given by the specular reflection laws. For refractors, the change of direction os defined by the Snell law. Because Snell law uses the refraction index which is wavelength-dependent, it is then interetisting to add additional parameters to each ray, such as the wavelength. This will permit to calculate the refraction index that has to be used by each ray. The information of each ray can also be extended to include some intensity, or better electric field amplitude. This allows to extend the pure geometrical tracing to include physical models that take into account the optical element reflectivity or transmittivity. This combination of using a geometrical model plus a physical model allows to simulate every element used in a synchrotron beamline, such as mirrors and combination of them (e.g., KBs); lenses, compound refractive lenses and transfocators; gratings of any type and shape, crystal systems, etc. Ray tracing is a simple and extremely powerful technique for calculating the main characteristics of the photon beam (size, divergence, photon distribution) at every point of the beamline. Although very powerful commercial ray tracing packages are available in the market, they are not suitable for synchrotron simulations because they do not cover the particularities of X-ray devices and sources. For that purposes, several packages created in the synchrotron community and are available, like SHADOW \cite{codeSHADOW}, RAY \cite{codeRAY}, McXtrace \cite{codeMCXTRACE} or XRT \cite{codeXRT}. SHADOW is probably the one that is more used and cited. We use SHADOW and its interface ShadowOUI \cite{codeSHADOWOUI}, available as a module of the OASYS suite.
 
 
 % When analyzing an optical system producing an extremely high demagnification of the source one can think in several limiting factors that could affect the focal sizes calculated by hand in Table~\ref{tab:HandCalculations}. 
@@ -327,7 +327,7 @@ Ray tracing is a simulation method based on tracing some light rays along the op
 % }
 
 We performed ray tracing using the elliptical reflectors with finite dimensions as focusing elements. The reflector shape is chosen to be elliptical as this is the theoretical shape producing a point-to-point focusing. For a first calculation  the elliptical elliptical reflectors are considered perfect, and have no slope errors. 
-The results in Fig.~\ref{fig:ray tracing}a show two facts. One is that the migration from ESRF lattice to the EBS will significantly improve the horizontal size, and the VSS is not needed. For EBS, the whole beam passes though the VSS, producing a final spot with almost Gaussian horizontal intensity profile instead of the step distribution for ESRF. Secondly, one can observe a much larger luminosity in the EBS case. The transimittivity values are 0.165\% for ESRF and 2.28\% for EBS. These values confirm what we calculated by hand (0.2\% for ESRF and and 2.95\% for EBS). As mentioned before, these values are similar to the coherent fraction \cite{coherentfraction} (0.12 for ESRF and 2.73\% for EBS), meaning that a very high coherence of the beam is expected, therefore some degradation of the beam by clipping the beam by apertures and element acceptance is expected. 
+The results in Fig.~\ref{fig:ray tracing}a show two facts. One is that the migration from ESRF lattice to the EBS will significantly improve the horizontal size, and the VSS is not needed. For EBS, the whole beam passes though the VSS, producing a final spot with almost Gaussian horizontal intensity profile instead of the step distribution for ESRF. Secondly, one can observe a much larger luminosity in the EBS case. The transimittivity values are 0.165\% for ESRF and 2.28\% for EBS. These values confirm the analytical estimations (0.2\% for ESRF and and 2.95\% for EBS). As mentioned before, these values are similar to the coherent fraction \cite{coherentfraction} (0.12 for ESRF and 2.73\% for EBS), meaning that a very high coherence of the beam is expected, therefore some degradation of the beam by clipping the beam by apertures and element acceptance is expected. 
 
 % Moreover, the treatment of the slope errors cannot be done without considerent effects of coherence, as discussed in \cite{hybrid}. This will be discussed in the next sections. 
 
@@ -555,8 +555,8 @@ The spectral density at the EBS photon source is represented in Fig.~\ref{fig:sp
 S(x,y) = \sum_{m=0}^{\infty} \lambda_m |\Phi_m(x,y)|^2.
 \end{equation}
 Figs.~\ref{fig:spectraldensity}b-e represent the coherent modes with $m$=0 to $m$=3. It can be shown that the first mode is centered on the axis but extends over an spatial region smaller than the spectral density. Next mode ($m$=1) contributes to extend the spectral density in horizontal, but presents zero intensity at the origin. Successive modes extend  the spectral density in horizontal, sometimes presenting a lobe centerer at zero and sometimes not (e.g., $m$=3). Modes with several lobes along the vertical will also appear, but not so often than in the horizontal, because of the elliptical shape of the spectral density. The coherent modes are orthonormal, thus verifying 
-\begin{equation}
-S(x,y) = \int_{-\infty}^{\infty} \Phi^*_m(x,y) \Phi_n(x,y)~dx~dy = \delta_{mn}
+\begin{equation}\label{eq:mode normalization}
+M_{mn} = \int_{-\infty}^{\infty} \Phi^*_m(x,y) \Phi_n(x,y)~dx~dy = \delta_{mn}
 \end{equation}
 with $\delta_{mn}$ the Kronecker delta. The coherence fraction of 2.8\% for the EBS source means that for an optimal coherence experiment one should remove 97.2\% of the emitted photons. This task is performed by the beamline. The beamline elements modify the different modes in a different manner, but it will never be possible to remove all the photons except from the lowest coherent mode, because there is an overlapping of the intensity of the lowest mode with the other ones. Therefore it is impossible to obtain a fully coherent beam that must contain only a single mode. 
 
@@ -575,20 +575,10 @@ with $\delta_{mn}$ the Kronecker delta. The coherence fraction of 2.8\% for the 
 \end{figure}
 
 
-The coherent modes for the EBS have been propagated using a beamline simplified with ideal focusing elements and slits to determine their numerical aperture (like in Section~\ref{wofry}). Fig.~\ref{fig:mode transmission} shows how the intensity of the first modes is reduced by geometrical considerations. 
+The coherent modes calculated at the EBS source have been propagated using a beamline simplified with ideal focusing elements and slits to determine their numerical aperture (like in Section~\ref{wofry}). Fig.~\ref{fig:mode transmission} shows how the intensity of the first modes is reduced by geometrical considerations. 
 %We recall that in the coherent mode expansion, the modes are orthonormal, therefore the integrated intensity for any mode is always one at the source. 
-As discussed, coherent modes will be ``cut'' in a different manner, depending on the slits cropping effect. Fig.~\ref{fig:mode transmission} shows that the lowest mode ($m$=0) transfer is about 25\%, the mode $m$=2 has a 10\% transfer and the mode $m$=4 about 6\%. The other modes have less than 5\% transfer and modes higher than $m$=10 practically do not contribute to the final spectral density. Note that the transmission of mode $m$=2 is higher than mode $m$=1, because this one does not contain a central lobe (Fig.~\ref{fig:spactraldensity}c).  
-
-\begin{figure}\label{fig:mode transmission}
-    \centering
-        \includegraphics[width=\textwidth]{GRAPHICS/mode_transmission.png}
-    \caption{Transmission of the different modes due to geometrical effects.}
-\end{figure}
-
-This analysis of the mode transmission is mode dramatic if one looks to the total intensity in the mode, which is given by its eigenvalue. Neglecting modes higher than 10, the lowest coherent mode ($m$=0) carries the 49.5\% of the beam intensity, 18.4\% for the mode $m$=2, and less than 5\% for the others. As commented before, the coherent modes at the source, propagated and cropped by the beamline, are not longer orthonormal, therefore they cannot be called coherent modes of the resulting beam. At this point, the new coherent modes can be calculated applying a new coherent mode decomposition on the cross spectral density of the transmitted beam, that is known from source coherent mode expansion. Making this numerical calculation with COMSYL, one obtains a mode occupation spectrum (see Fig.~\ref{fig:rediagonalization}) where the lowest mode accounts for the 83\% of the total spectral density. The next mode accounts for only XX\% and the rest are practically noise. The intensity of these two modes is shown in Fig.~\ref{fig:final modes}. The first mode has dimensions of XXxXX nm$^2$ and the spectral density, that is practically given by the summ of the intensity of these two modes, is XXxXX nm$^2$.
-
-This analysis confirms the quantitative predictions discussed in the previous sections, but give a quantitative figure of the coherence of the beam, a  coherent fraction of CF=83\% that measures the "coherence purity".
-
+As discussed, coherent modes will be ``cut'' in a different manner, depending on the slits cropping effect.
+This imply that the Eq.~\ref{eq:mode normalization} is not longer verified, and for the propagated modes $M_{mm}\le$1 and $M_{mn}\ne$0 for $m\ne n$. Therefore, the coherent modes of the source after propagation and cropping by the beamline are no longer coherent modes of the resulting beam. Fig.~\ref{fig:mode transmission} shows that the most important transfer ratio ($M_{mm}$)transfer for the lowest mode is about $M_{00}$=25\%, then $M_{22}$=10\% and $M_{44}$=6\%. The other modes shown transfer less than 5\% transfer, and modes higher than $m$=10 practically do not contribute to the final spectral density. Note that, as discussed before, the transmission of mode $m$=2 is higher than mode $m$=1, because this one does not contain a central lobe (Fig.~\ref{fig:spectraldensity}c).  
 
 % #########################################################
 %            iteration            intensity         intensity/I0   intensity/TotalInt
@@ -601,7 +591,7 @@ This analysis confirms the quantitative predictions discussed in the previous se
 %                    6               0.03452               0.14403              0.06351 
 %                    7               0.01459               0.06087              0.02684 
 %                    8              0.011714               0.04887              0.02155 
-%                    9             0.0051714               0.02158              0.00951 
+%                    9             0.0051714               0.02158              0.00951
 
 % #########################################################
 %            iteration            intensity         intensity/I0   intensity/TotalInt
@@ -615,45 +605,87 @@ This analysis confirms the quantitative predictions discussed in the previous se
 %                    7                 42906               0.03975              0.01969 
 %                    8                 32393               0.03001              0.01487 
 %                    9                 13446               0.01246              0.00617 
-  
+
+\begin{figure}\label{fig:mode transmission}
+    \centering
+        \includegraphics[width=\textwidth]{GRAPHICS/propagated_modes.eps}
+    \caption{Transmission $M_{mm}$ (see Eq.~\ref{eq:mode normalization}) of the different modes of the EBS source  due to the effect of propagation and cropping by the beamline optics.}
+\end{figure}
+
+This analysis of the mode transmission is mode dramatic if one looks to the total intensity in the mode, which is given by its eigenvalue. Neglecting modes higher than 10, the lowest coherent mode ($m$=0) carries the 49.5\% of the beam intensity, 18.4\% for the mode $m$=2, and less than 5\% for the others. 
+
+% 0    8.283396938003417809e-01
+% 1    1.334192926516760969e-01
+% 2    1.726189402927864533e-02
+% 3    7.157008449213129661e-03
+% 4    6.639480916324663404e-03
+% 5    3.894724551090737296e-03
+% 6    2.436986236753659139e-03
+% 7    4.732687905858104635e-04
+% 8    2.758652782324634112e-04
+% 9    7.761681183345831123e-05
+% 10   1.934547528193778418e-05
 
 \begin{figure}\label{fig:rediagonalization}
     \centering
-        \includegraphics[width=\textwidth]{GRAPHICS/rediagonalization.png}
-    
-    \caption{Occupation of the coherent modes in the final focused beam.}
+        \includegraphics[width=\textwidth]{GRAPHICS/rediagonalized_modes.eps}
+    \caption{Occupation of the coherent modes of the final focused beam.}
 \end{figure}
+
+As commented before, the coherent modes at the source, propagated and cropped by the beamline, are not longer orthonormal, therefore they cannot be called coherent modes of the resulting beam. At this point, the new coherent modes can be calculated applying a new coherent mode decomposition on the cross spectral density of the transmitted beam, that is known from source coherent mode expansion. Making this numerical calculation with COMSYL, one obtains a mode occupation spectrum (see Fig.~\ref{fig:rediagonalization}) where the lowest mode accounts for the 83\% of the total spectral density. The next mode accounts for only 13\% and the rest are practically negligeable. The intensity of these two coherent modes is shown in Fig.~\ref{fig:final modes}. The first mode has FWHM dimensions of 7.3$\times$6.7 nm$^2$. The spectral density, that is practically given by the contribution of the first two modes has a FWHM equal to the $m$=0 mode because, in horizontal the $m$=1 mode does contribute only to the tails and in vertical is identical to mode $m$=0.
+
+This analysis confirms the quantitative predictions discussed in the previous sections, but give a quantitative figure of the coherence of the beam, a  coherent fraction of CF=83\% that measures the "coherence purity".
+
+
+ 
+
+
+
 
 \begin{figure}\label{fig:final modes}
     \centering
-        \includegraphics[width=0.45\textwidth]{GRAPHICS/final_mode0.png}
-        \includegraphics[width=0.45\textwidth]{GRAPHICS/final_mode1.png}
-    \caption{Coherent modes of the focused beam}
+        \includegraphics[width=0.95\textwidth]{GRAPHICS/final_mode0.png}
+        \includegraphics[width=0.95\textwidth]{GRAPHICS/final_mode1.png}
+    \caption{Coherent modes of the focused beam. Top: lower mode ($m$=0), with 83\% occupation and FWHM of 7.3$\times$6.7 nm$^2$. Botton: mode $m$=1, with 13\% occupation and FWHM of 19.0$\times$6.7 nm$^2$}
 \end{figure}
 
 
 \todo{
 \begin{itemize}
+ \item introduce slope errors in WOFRY propagation
+ \item propagate modes with SRW
  \item create some plots with cuts of W
 \end{itemize}
 }
  
 
 \section{Discussion} 
+\label{discussion}
 
-The first step in the wave optics simulation is to assume a full coherent source and simulate the propagation of such wavefront through the beamline
-The wavefront simulation of the beamline include propagation of the beam from element to element (drift spaces) using different possible propagators. Usually a propagator based on the Freskel-Kirchhoff integral is used, as it is valid for both near and far field. The applications of this (and other) operators imply the calculation of an integral (or sum) at each pixel of the image plane. This is costly from the computer point of view, so Fourier Transforms (Fourier Optics) are used to reduce complexity and calculation time. This is practically the only choice for simulating 2D images. The use of Fourier Transforms adds another problem: the result is very dependent on the sampling of the wavefront (i.e., pixel size, number of points, dimension of the window where the wavefront is sample). This means the usually one has to test many configurations before finding one that works reaonably well (even though one can never guarantee the complete accuracy of the sampling used). A full wavefront optics simulation is an iterative process, where the user has to refine the sampling parameters element by element to be sure the wavefront at each position is sampled correctly. This is a time consuming work for performing it with the full 2D simulation. For this reason, a wavefront calculation may be started by a simplified system, using simplified models for the source and focusing elements. Moreover, because the horizontal and vertical coupling is usually small in synchrotron beamlines, it is convinient to separate the simulation in two, one for the horizontal plane and one for the vertical one
+After the analysis of how the ID16A optics modify the characteristics of the x-ray beam done in the previous section, when one looks back to the numbers obtained by simple analytical canculations, one can verify that these analytical previsions were a quite good approximation of the values then obtained using more sophisticated methods. The size of the focused beam and the transmission calculated using ray tracing are in good agreement. 
 
+When comparing beam sizes, one usually assume that the intensity distributions are Gaussian and therefore well characterised by the FWHM value. From Fig.~\ref{fig:ray tracing} one can see that the horizontal intensity distribution is not Gaussian for the ESRF, as a result of cropping the beam with the VSS opened to 50$\mu$m. Although the electron beam statistics is in a very good approximations Gaussian, the undulator emission is not. In our ray tracing simulations we always suppose that we work at the resonance, then we applied the Gaussian approximation used in Eqs.~\ref{eq:photon small sigmas} and \ref{eq:photon big sigmas} to compute the geometrical characteristics of the source. This is certainly acceptable at the resonance but will fail out of resonance. Indeed, these lack of Gaussianity is relevant in the calculations of the coherent fraction. We approximate the coherence fraction by Eq.~\ref{eq:coherent fraction}, which for zero emittance ($\sigma_{x,y}=\sigma_{x',y'}$=0) becomes CF=1, as expected because a zero emittance electron beam, that is a single electron or a filament beam affected by an magnetic field emmits a fully coherent wavefront. However, the photon source for a filament beam would have an emittance of $\sigma_u \sigma_{u'} \approx \lambda / 2 \pi$ (using Eqs.~\ref{eq:photon small sigmas}), which is in contradiction with theory, that says that a pure coherent state has emittance of $\lambda / 4 \pi$, as happens for a Gaussian photon beam. This is justified considering that Eqs.~\ref{eq:photon small sigmas} are approximations obtained by fitting with Gaussians the theoretical non-Gaussian distributions (see Ref.~\cite{elleaume}). The correct definition of CF as the occupation of the lowest coherent mode does not present these incongruences. However, its calculation requires to perform the coherent mode decomposition, as done in Section~\ref{comsyl} which is very costly. It is therefore the case to find the compromise between accuracy and cost, or where in the hierarchical series of methodologies proposed one should stop. 
 
-Simulations took significantly longer to be completed for the multi electron case: few hours on a 56-core computer cluster.
-
-
-
-
-It is interesting to remark that although Monte Carlo multielectron method can in principle calculate Eq.~\ref{CSD} the storage at every point is unmanagleable, so usually only some 'cuts' of the CSD are stored, such as $W(x_1,0,x_2,0;z,\omega)$ (horizontal) or $W(0,y_1,0,y_2;z,\omega)$ (vertical) \todo{move this to the discussion?}.
+The combination of ray tracing and wave optics methods used indicate that the focalized beam size due to  demagnification with mirrors (giving for EBS 10x5 nm2 analytically, 8.4x4.8 nm2 with ray tracing) has to be corrected with diffraction effect (8.4x7.8 hybrid, 12.7x9.2 SRW) and then add the slope error effect. The slope errors are very small, necessary not to blow up the size and kit it in the specifications range (10.8x8.2 hybrid 13.6x9.9 SRW). It is important to treat the the slope errors correctly. Slope errors can be included in the ray tracing using the data in Appendix A and applying specular reflection on the optical surface with errors. This is the standard mode of including slope errors in SHADOW, using measured profiles or synthetic ones. It works well for the case of incoherent beams, but in our case, because of the high coherence of the beam the ray tracing method (specular reflection) overestimates the blowing of the focal spot conducting to wrong results. Therefore the slope errors of the KB system have been considered using a ``wave optics approach'', as explained in Ref.~\cite{hybrid}. Here, the mirror heigh errors $z(x)$ are projected to the plane perpendicular to the propagation ($z(x) \sin \theta$, with $\theta$ the grazing angle) and originate a phase shift $\psi$ in the wavefront phase proportional to the optical path $\psi = - k z(x) \sin \theta $. This is the algorithm used in the simulations in Sections~\ref{level1}, \ref{srw_se} and \ref{srw_me}.   
 
 
-The fist coherence mode is always centered on-axis (see, e.g, Fig.~\ref{fig:spectraldensity}b) and will always be centered when propagated until a position where an optical element (an aperture or mirror with finite dimensions) will crop it removing part of its intensity but letting the central part to go throught. The subsequent modes will be more absorbed as they extend more. In particular the modes that do not have a central lobe will lose more intensity. 
+% The first step in the wave optics simulation is to assume a full coherent source and simulate the propagation of such wavefront through the beamline. 
+
+The wavefront simulation of the beamline include propagation of the beam from element to element (drift spaces) using different possible propagators. A propagator based on the Freskel-Kirchhoff integral is used. The applications of this (and other) operators imply the calculation of an integral (or sum) at each pixel of the image plane. This is costly from the computer point of view, so Fourier Transforms (Fourier Optics) are used to reduce complexity and calculation time. This is practically the only choice for simulating 2D images. The use of Fourier Transforms adds another problem: the result is very dependent on the sampling of the wavefront (i.e., pixel size, number of points, dimension of the window where the wavefront is sample). This means the usually one has to test many configurations before finding one that works reaonably well (even though one can never guarantee the complete accuracy of the sampling used). A full wavefront optics simulation is an iterative process, where the user has to refine the sampling parameters element by element to be sure the wavefront at each position is sampled correctly. This is a time consuming work for performing it with the full 2D simulation. For this reason, we found very useful to start a wavefront calculation in 1D, separating the horizontal and vertical simulations, and using a simplified system with ideal sources and ideal focusing elements. This is ofted a good choice because the horizontal and vertical coupling is usually small in synchrotron beamlines. This 1D simulations help in refining the choice of propagator and its parameters (resampling, zoom factors) that will be valid if a, more costly, full 2D simulation is envisaged.
+
+Many of the simulations presented here (ray tracing and coherent optics in Sections XXXXX) can be done interactively in a normal laptop. However, when one one to obtain information on the partial coherence, very long calculations have to be done. For example, Monte Carlo calculations in Section~\ref{srw_me} took significantly longer to be completed for the multi electron case: a few hours on a 56-core computer cluster. For performing the coherent mode decomposition the calculation time depends very much on the dimensioning on the problem. The EBS case is reasonable: we sampled the wavefronts using 1007x335 pixels and calculated 1103 modes that represent 98\% of the spectral density. This represents 5 MB per wavefront and a matrix of 1695 GB to diagonalize. It took less that four hours in the a cluster of 28 cores. The calculation is more expensive if one wants to decompose a source that is pretty incoherent like our ESRF-High-$\beta$. This is a limit case, as the wavefields have to be vey large XXxXX to accomodate the large espatial extension of the source. The calculation presented here took XX days in a large XX cluster. To give an idea of the real cost, a similar work send to the AWS cluster costed about 2000 USD. This was done as a test case, to evaluate the limits of the calculations, but it is certainly not recommended to do similar things, not only for the cost but also for the lack of interest to treat with partial coherence methods a source that is quite incoherent. In Appendix B we present for the ESRF High$\beta$ similar results than those in Section~\ref{comsyl}. 
+
+There are some effects that are typically studied when designing and simulating a beamline that have been ignores here. For example the study of the power emitted by the source and its heat load effect in the first (or firsts) slits and optical elements (here the ML monochromator). Also reflectivity of the elements are not considered. Thir effect can also be fully simulated, but we preferred here to integrate them in the simulations for the sake of clarity. Again an analytical estimation would give a reflectivity about 0.7 for multilayers and 0.9 for mirrors, therefore a reduction factor of (0.7)**3 ML for the beamline flux due to reflectivity of mirror coatings. 
+
+In conclusion, we have shown how to obtain the relevant parameters necessary to quantify flux, transmission, fucused beam size, and coherent fraction for a modern beamline with already exceptional performances in the old ESRF DBA lattices, and advanced the improvements to be expected when the EBS will start in 2020. In this discussion we obtained these parameters using a hierarchical flowchart, with increasing complexity. The phase of analytical estimation of the main parameters is essential, not only to start with some values but also because these values help to perform sanity check of the computer simulations. A ray tracing simulation is inexpensive and always recommended. The comparison of the CF beamline transmittivity would give an idea of how coherent is the beam, or how many modes will be present in your final beam. For high coherence (a few modes), like for ID16A, the wave optics calculations are necessary. If the final beam has a very high coherence, like in our case, coherent optics (1D simplifications, and single electron calculations) may give good results. We may have stopped there, as in our case coherence is very high. The COMSYL calculations presented here introduce a new way of quantitatively assess the quality of the partial coherent beam via the calculation of the coherent fraction.  
+
+
+
+
+% It is interesting to remark that although Monte Carlo multielectron method can in principle calculate Eq.~\ref{CSD} the storage at every point is unmanagleable, so usually only some 'cuts' of the CSD are stored, such as $W(x_1,0,x_2,0;z,\omega)$ (horizontal) or $W(0,y_1,0,y_2;z,\omega)$ (vertical) \todo{move this to the discussion?}.
+% 
+% 
+% The fist coherence mode is always centered on-axis (see, e.g, Fig.~\ref{fig:spectraldensity}b) and will always be centered when propagated until a position where an optical element (an aperture or mirror with finite dimensions) will crop it removing part of its intensity but letting the central part to go throught. The subsequent modes will be more absorbed as they extend more. In particular the modes that do not have a central lobe will lose more intensity. 
 
 
 \todo{
@@ -676,6 +708,16 @@ The fist coherence mode is always centered on-axis (see, e.g, Fig.~\ref{fig:spec
 \section{Summary}
 
 Bla bla
+
+\ack{\todo{someone to thank?}}
+
+\appendix
+
+\section{Metrology of the KB mirrors}
+
+\section{COMSYL results for the ESRF-H$\beta$}
+
+
 
 \bibliographystyle{iucr}
 \bibliography{paper-hierarchical}
