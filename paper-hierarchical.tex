@@ -60,7 +60,7 @@
      %-------------------------------------------------------------------------
      % Information about journal to which submitted
      %-------------------------------------------------------------------------
-     \journalcode{S}              % Indicate the journal to which submitted
+     \journalcode{K}              % Indicate the journal to which submitted
                                   %   A - Acta Crystallographica Section A
                                   %   B - Acta Crystallographica Section B
                                   %   C - Acta Crystallographica Section C
@@ -313,7 +313,7 @@ To estimate the geometrical transmission of the beamline we have to consider whi
 %\todo{check with references $10^9$ at 33.6 keV. I get: 1.6e+15 * 0.00295 * 0.7**3 = 1.62e+12. How closed are the slits? We used the undulator peak value over the whole ML bandwidth, that overestimates the integrated flux.}
 %\todo{need to consider ML reflectivity for the 3 reflections, also undulator is not perfect, horizontal slit may be closed to less than $50 \mu m$, also KB mirrors may not be fully illuminated and slope error losses due to initial ML mono are neglected}
 
-One can also make some simple inferences about the beam coherence. The coherent fraction (CF) \cite{arxivCF} of the undulator beam is the occupation of the lowest coherent mode, and will be discussed further in Section~\ref{level2}. An approximated estimation of CF can be obtained using Eqs.~\ref{eq:photon small sigmas} and \ref{eq:photon big sigmas}. The coherent fraction is the ratio of the phase space of the fully coherent (zero emittance) beam raletive to the true beam. The CF in the horizontal and vertical planes are
+One can also make some simple inferences about the beam coherence. The coherent fraction (CF) \cite{arxivCF} of the undulator beam is the occupation of the lowest coherent mode, and will be discussed further in Section~\ref{level2}. An approximated estimation of CF can be obtained using Eqs.~\ref{eq:photon small sigmas} and \ref{eq:photon big sigmas}. The coherent fraction is the ratio of the phase space of the fully coherent (zero emittance) beam relative to the true beam. The CF in the horizontal and vertical planes are
 \begin{equation}\label{eq:coherent fraction}
  CF_{(h,v)} = \frac{\sigma_u \sigma'_u}{\Sigma_{(h,v)} \Sigma'_{(h,v)}},
 \end{equation}
@@ -356,7 +356,7 @@ The results in Fig.~\ref{fig:ray tracing}a show two phenomena. One is that the m
 \includegraphics[width=0.45\textwidth]{GRAPHICS/hybriderrorsEBS.png}
 \caption{Image produced by different types of ideal focusing for the ESRF (left column) and EBS (right column). The source with parameters in Table~\ref{tab:HandCalculations}. 
 The first row has been calculated using the ideal reflectors (cylindrical for ML, elliptical for the BK mirrors) without slope errors. 
-The second row shows the image calculated the hybrid option (ray tracing plus coherent diffraction) also for ideal reflectors with no slope errors. It shows the focal spot degradation due to the diffraction arising from the beam aperturing by the KB mirrors. The calculations in the bottom row also include slope errors using the real mirror profiles measures at the ESRF metrology lab (see Appendix A).  Further beam broadening and the growth of satellite structures in the vertical intensity distribution can be observed. 
+The second row shows the image calculated the hybrid option (ray tracing plus coherent diffraction) also for ideal reflectors with no slope errors. It shows the focal spot degradation due to the diffraction arising from the beam aperturing by the KB mirrors. The calculations in the bottom row also include slope errors using the real mirror profiles measures at the ESRF metrology lab (see Appendix~\ref{appendix:metrology}).  Further beam broadening and the growth of satellite structures in the vertical intensity distribution can be observed. 
 The focal beam dimensions (FWHM of the histograms) are written in the plot title.
 }
 \end{figure}
@@ -415,7 +415,7 @@ A next step in the wave optics simulation is, assuming full coherence, to genera
 
 The computer code chosen for these calculations is Synchrotron Radiation Workshop (\textsc{srw}) \cite{codeSRW}, which over the past two decades has been extensively benchmarked throughout different synchrotron radiation facilities and has become widely accepted within the X-ray community. Figure \ref{fig:SingleElectron} shows the horizontal integrated intensity at the focal position for the ID16A. It can been seen that there is little difference between using thin ideal lenses or the elliptical mirror model. The elliptical mirror presents a slight reduction in intensity and asymmetry but no significant differences are observed, which is in accordance with  the findings of \cite{Canestrari2014}. Notice that the differences are minimal and to accentuate them we have chosen logarithmically scaled plots to represent the intensity distributions at the focal position. It is also important to mention that this equivalency between ideal lenses and elliptical mirrors is only valid close to the focal position: down- or upstream the focal position, differences are no longer negligible \cite{Canestrari2014}. 
 
-It is also possible to add slope errors to the simulations to study the resulting impact upon the focal spot quality (Fig.~\ref{fig:SingleElectron}). For that, the available surface metrology data of the reflective elements (see Appendix \ref{appendix:metrology})  are used. For both cases (i.e., simulating the beamline using thin optical elements or elliptical mirrors), the beam sizes calculated as the FWHM at the focal position are little affected by the presence of the slope errors (see Table \ref{tab:SRW_results}). There is a significant reduction and blurring of the interference fringes compared to observations with no slope error. They are almost completely removed and associated with a large increase of the background level: the radiation found on the main lobe (focus) shifts to the side lobes when the slope errors are considered. This is accompanied by an obvious reduction on the peak intensity. Table \ref{tab:SRW_results} compiles the beam sizes at focal position for mentioned simulations.
+It is also possible to add slope errors to the simulations to study the resulting impact upon the focal spot quality (Fig.~\ref{fig:SingleElectron}). For that, the available surface metrology data of the reflective elements (see Appendix~\ref{appendix:metrology})  are used. For both cases (i.e., simulating the beamline using thin optical elements or elliptical mirrors), the beam sizes calculated as the FWHM at the focal position are little affected by the presence of the slope errors (see Table \ref{tab:SRW_results}). There is a significant reduction and blurring of the interference fringes compared to observations with no slope error. They are almost completely removed and associated with a large increase of the background level: the radiation found on the main lobe (focus) shifts to the side lobes when the slope errors are considered. This is accompanied by an obvious reduction on the peak intensity. Table \ref{tab:SRW_results} compiles the beam sizes at focal position for mentioned simulations.
 
 \begin{figure}
     \centering
@@ -636,15 +636,13 @@ This analysis confirms the quantitative predictions discussed in the previous se
         \includegraphics[width=0.95\textwidth]{GRAPHICS/final_mode1.png}
     \caption{Coherent modes of the focused beam. Top: lower mode ($m$=0), with 83\% occupation and FWHM of 7.3$\times$6.7 nm$^2$. Botton: mode $m$=1, with 13\% occupation and FWHM of 19.0$\times$6.7 nm$^2$}
 \end{figure}
-
-
-\todo{
-\begin{itemize}
- \item introduce slope errors in WOFRY propagation
- \item propagate modes with SRW
- \item create some plots with cuts of W
-\end{itemize}
-}
+%\todo{
+%\begin{itemize}
+% \item introduce slope errors in WOFRY propagation
+% \item propagate modes with SRW
+% \item create some plots with cuts of W
+%\end{itemize}
+%}
  
 
 \section{Discussion} 
@@ -659,21 +657,22 @@ The combination of ray tracing and wave optics methods used indicate that the fo
 
 The wavefront simulation of the beamline include propagation of the beam from element to element (drift spaces) using different possible propagators. A propagator based on the Freskel-Kirchhoff integral is used. The applications of this (and other) operators imply the calculation of an integral (or sum) at each pixel of the image plane. This is costly from the computer point of view, so Fourier Transforms (Fourier Optics) and its Fast Fourier Transform implementation are used to reduce amount of operations and the calculation time. This is practically the only choice for propagating 2D wavefronts. The use of Fourier Transforms adds another problem: the result is very dependent on the sampling of the wavefront (i.e., pixel size, number of points, dimension of the window where the wavefront is defined). This means the usually one has to test many configurations before finding one that works reasonably well (even though one can never guarantee the complete accuracy of the sampling used). A full wavefront optics simulation is an iterative process, where the user has to refine the sampling parameters element by element to be sure the wavefront at each position is sampled correctly. This is a time consuming work in particular for 2D simulation. We found very useful to start a wavefront simulation in 1D, separating the horizontal and vertical simulations, using a simplified system with ideal sources and ideal focusing elements. The use of 1D propagation is justified because in in synchrotron beamlines the horizontal and vertical coupling is usually small. This 1D simulations help in refining the choice of propagator and its parameters (resampling, zoom factors) that can be reused in a full 2D simulations.
 
-Regarding computational effort, simulations concerning ray tracing (Section~\ref{level1}) and coherent optics (Sections~\ref{wofry} and \ref{srw_se}) can be done interactively in a normal laptop. However, for those concerning partial coherence, very long calculations are needed. For example, Monte Carlo calculations in Section~\ref{srw_me} for the multi electron case spent a few hours on a 56-core computer cluster for simulating \inred{NN} electrons. For performing the COMSYL coherent mode decomposition the calculation time depends very much on the dimensions on the problem. For EBS the wavefronts were sampled using 1007$\times$335 pixels, and 1103 modes were computed representing 98\% of the spectral density. This represents 5 MB per wavefront and a matrix of 1695 GB to diagonalize. It took less that four hours in the a cluster of 28 cores. The calculation is more expensive if one wants to decompose a source that is pretty incoherent like our ESRF-High-$\beta$. This is a limit case, it was used wavefields of 10075$\times$201 pixels to accommodate the large spatial extension of the source. We obtained 4016 modes totalizing only 86\% of the spectral density.  The calculation took more than 4 days in a 84 cores cluster. This was done as a test case, to demonstrate the feasibility of the calculations. It is not recommended to do similar calculations that imply a the cost because a source that is quite incoherent was treated with partial coherence methods. \inred{In Appendix B we present for the ESRF High$\beta$ similar results than those in Section~\ref{comsyl}}. 
+Regarding computational effort, simulations concerning ray tracing (Section~\ref{level1}) and coherent optics (Sections~\ref{wofry} and \ref{srw_se}) can be done interactively in a normal laptop. However, for those concerning partial coherence, very long calculations are needed. For example, Monte Carlo calculations in Section~\ref{srw_me} for the multi electron case spent a few hours on a 56-core computer cluster for simulating \inred{NN} electrons. For performing the COMSYL coherent mode decomposition the calculation time depends very much on the dimensions on the problem. For EBS the wavefronts were sampled using 1007$\times$335 pixels, and 1103 modes were computed representing 98\% of the spectral density. This represents 5 MB per wavefront and a matrix of 1695 GB to diagonalize. It took less that four hours in the a cluster of 28 cores. The calculation is more expensive if one wants to decompose a source that is pretty incoherent like our ESRF-High-$\beta$. This is a limit case, it was used wavefields of 10075$\times$201 pixels to accommodate the large spatial extension of the source. We obtained 4016 modes totalizing only 86\% of the spectral density.  The calculation took more than 4 days in a 84 cores cluster. This was done as a test case, to demonstrate the feasibility of the calculations. It is not recommended to do similar calculations that imply a the cost because a source that is quite incoherent was treated with partial coherence methods. 
+%\inred{In Appendix B we present for the ESRF High$\beta$ similar results than those in Section~\ref{comsyl}}. 
 
-Some effects that are typically studied when designing and simulating a beamline have not been discussed here. For example the study of the power emitted by the source and its heat load effect in the first (or firsts) slits and optical elements (here the ML monochromator). Also, the reflectivity of the elements are not considered. The simulation of this was not included in the simulations, because it can be estimated analytically considering an average reflectivity about \inred{0.7 for multilayers and 0.9 for mirrors, therefore a reduction factor of (0.7)**3 ML for the beamline flux due to reflectivity of mirror coatings}. 
+Some effects that are typically studied when designing and simulating a beamline have not been discussed here. For example the study of the power emitted by the source and its heat load effect in the first (or firsts) slits and optical elements (here the ML monochromator). Also, the reflectivity of the elements are not considered. The simulation of this was not included in the simulations, because it can be estimated analytically considering an average reflectivity about 0.7 for multilayers and 0.9 for mirrors, therefore a transmission factor of 0.44 for the beamline flux due to reflectivity of mirror coatings. 
 
-\todo{
-Complete discussion. Some ideas:
-\begin{itemize}
- \item DISCUSS EXPERIMENTAL RESULTS?
- \item Discuss coherence length?
- \item Comment on the heat-load deformation 
- \item Extend the effect of reflectivity by ML and mirror coating
- \item Talk a bit more on Oasys?
- \item comment on general strategy for beamline simulations and the application of the shown hierarchical model. Make a flowchart
-\end{itemize}
- }
+%\todo{
+%Complete discussion. Some ideas:
+%\begin{itemize}
+% \item DISCUSS EXPERIMENTAL RESULTS?
+% \item Discuss coherence length?
+% \item Comment on the heat-load deformation 
+% \item Extend the effect of reflectivity by ML and mirror %coating
+% \item Talk a bit more on Oasys?
+% \item comment on general strategy for beamline %simulations and the application of the shown hierarchical %model. Make a flowchart
+%\end{itemize}
+% }
 
 \section{Summary and conclusions}
 \label{summary}
@@ -688,25 +687,21 @@ The analytical estimation of the main parameters is mandatory first step in the 
 % 
 
 
-\ack{\todo{someone to thank? - RC: before the PHANGS in Trieste I was contacting Oleg about the elliptical mirrors. There was a bug there and he corrected it. Only after fixed it we were able to simulate the ID16A with the mirror elements. So maybe something mentioning some disucssions on the early stages of the SRW simulations.}}
+%\ack{\todo{someone to thank? - RC: before the PHANGS in Trieste I was contacting Oleg about the elliptical mirrors. There was a bug there and he corrected it. %Only after fixed it we were able to simulate the ID16A with the mirror elements. So maybe something mentioning some disucssions on the early stages of the SRW %simulations.}}
 
 \appendix
 
 \section{Metrology of the KB mirrors}
 \label{appendix:metrology}
 The residual height error of the multilayer monochromator and the KB mirrors, after removing the main ellitical shape, are shown in Fig.~\ref{fig:metrology}. These profiles are used along the text in ray tracing and wave optics simulations.
-\todo{
-RC: maybe plot the PSD for the three mirrors? Put them on the same scale to show how nice the KB's are?
- }
+
 \begin{figure}\label{fig:metrology}
-\includegraphics[width=0.8\textwidth]{GRAPHICS/ID16A_ML_W-B4C_120Strp.png}
-\includegraphics[width=0.8\textwidth]{GRAPHICS/ID16A_KB1_VF.png}
-\includegraphics[width=0.8\textwidth]{GRAPHICS/ID16A_KB1_HF.png}
-\caption{Error height profiles used for the simulations for a) the ML monochromator, b) the KB vertical focusing mirror, and c) the KB horizontal focusing mirror.}
+\includegraphics[width=0.95\textwidth]{GRAPHICS/metrology.eps}
+\caption{Error height profiles used for the simulations (left) and Power Spectral Density (right) for the ML monochromator (top row), the KB vertical focusing mirror (central row), and the KB horizontal focusing mirror (bottom row).}
 \end{figure}
 
-\section{COMSYL results for the ESRF-H$\beta$}
-\todo{Under development}
+%\section{COMSYL results for the ESRF-H$\beta$}
+%\todo{Under development}
 
 
 \bibliographystyle{iucr}
