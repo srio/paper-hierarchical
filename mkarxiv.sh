@@ -42,13 +42,7 @@ sed -e "s/GRAPHICS\/fluxU18.png/figure2.png/" paper-hierarchical.tex -i
 
 # figure 3
 cp GRAPHICS/figure3.png ./figure3.png
-sed -e "s/GRAPHICS\/idealelementsESRF/figure3/" paper-hierarchical.tex -i
-sed -e "/idealelementsEBS/d" paper-hierarchical.tex -i
-sed -e "/hybridnoerrorsESRF/d" paper-hierarchical.tex -i
-sed -e "/hybridnoerrorsEBS/d" paper-hierarchical.tex -i
-sed -e "/hybriderrorsESRF/d" paper-hierarchical.tex -i
-sed -e "/hybriderrorsEBS/d" paper-hierarchical.tex -i
-
+sed -e "s/GRAPHICS\/figure3/figure3/" paper-hierarchical.tex -i
 
 # figure 4
 cp GRAPHICS/wofry1D.png ./figure4.png
@@ -82,13 +76,9 @@ sed -e "s/GRAPHICS\/up_to_mode_id16a.eps/figure8b.eps/" paper-hierarchical.tex -
 
 # figure 9
 cp GRAPHICS/ebs_spectral_density.png ./figure9a.png
-sed -e "s/GRAPHICS\/ebs_spectral_density.png/figure9a.png/" paper-hierarchical.tex -i
 cp GRAPHICS/figure9b.png ./figure9b.png
-sed -e "s/GRAPHICS\/ebs_mode0/figure9b/" paper-hierarchical.tex -i
-sed -e "/ebs_mode1.png/d" paper-hierarchical.tex -i
-sed -e "/ebs_mode2.png/d" paper-hierarchical.tex -i
-sed -e "/ebs_mode3.png/d" paper-hierarchical.tex -i
-
+sed -e "s/GRAPHICS\/ebs_spectral_density.png/figure9a.png/" paper-hierarchical.tex -i
+sed -e "s/GRAPHICS\/figure9b/figure9b/" paper-hierarchical.tex -i
 
 # figure 10
 cp GRAPHICS/propagated_modes.eps ./figure10.eps
