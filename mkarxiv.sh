@@ -1,15 +1,17 @@
 #
 # script to create the ArXiv submission
 #
-# please be sure that you run pdflatex paper-hierarchical.tex in the main directory
-# before running the script, so paper-hierarchical.bbl and the *pdf files are created
+# please be sure that you run compile.sh in the main directory before running 
+# this script, so paper-hierarchical.bbl and the GRAPHICS/*eps-converted-to.pdf files 
+# are created
+#
 
 cd /users/srio/Working/paper-hierarchical
 rm -rf ARXIV2 ARXIV
 mkdir ARXIV
 cd ARXIV
 cp ../paper-hierarchical.tex .
-cp ../paper-hierarchical.bbl .
+#cp ../paper-hierarchical.bbl .
 cp ../iucr.cls .
 cp ../harvard.sty .
 cp ../siunitx.sty .
@@ -68,10 +70,10 @@ cp GRAPHICS/ebs_slopeTE_slopeOE_h.pdf ./figure7b.pdf
 sed -e "s/GRAPHICS\/ebs_slopeTE_slopeOE_h.pdf/figure7b.pdf/" paper-hierarchical.tex -i
 
 # figure 8
-cp GRAPHICS/cumulated_occupation.eps ./figure8a.eps
-sed -e "s/GRAPHICS\/cumulated_occupation.eps/figure8a.eps/" paper-hierarchical.tex -i
-cp GRAPHICS/up_to_mode_id16a.eps ./figure8b.eps
-sed -e "s/GRAPHICS\/up_to_mode_id16a.eps/figure8b.eps/" paper-hierarchical.tex -i
+cp GRAPHICS/cumulated_occupation-eps-converted-to.pdf ./figure8a.pdf
+sed -e "s/GRAPHICS\/cumulated_occupation.eps/figure8a.pdf/" paper-hierarchical.tex -i
+cp GRAPHICS/up_to_mode_id16a-eps-converted-to.pdf ./figure8b.pdf
+sed -e "s/GRAPHICS\/up_to_mode_id16a.eps/figure8b.pdf/" paper-hierarchical.tex -i
 
 
 # figure 9
@@ -81,12 +83,12 @@ sed -e "s/GRAPHICS\/ebs_spectral_density.png/figure9a.png/" paper-hierarchical.t
 sed -e "s/GRAPHICS\/figure9b/figure9b/" paper-hierarchical.tex -i
 
 # figure 10
-cp GRAPHICS/propagated_modes.eps ./figure10.eps
-sed -e "s/GRAPHICS\/propagated_modes.eps/figure10.eps/" paper-hierarchical.tex -i
+cp GRAPHICS/propagated_modes-eps-converted-to.pdf ./figure10.pdf
+sed -e "s/GRAPHICS\/propagated_modes.eps/figure10.pdf/" paper-hierarchical.tex -i
 
 # figure 11
-cp GRAPHICS/rediagonalized_modes.eps ./figure11.eps
-sed -e "s/GRAPHICS\/rediagonalized_modes.eps/figure11.eps/" paper-hierarchical.tex -i
+cp GRAPHICS/rediagonalized_modes-eps-converted-to.pdf ./figure11.pdf
+sed -e "s/GRAPHICS\/rediagonalized_modes.eps/figure11.pdf/" paper-hierarchical.tex -i
 
 # figure 12
 cp GRAPHICS/final_mode0.png ./figure12a.png
@@ -95,11 +97,8 @@ sed -e "s/GRAPHICS\/final_mode0.png/figure12a.png/" paper-hierarchical.tex -i
 sed -e "s/GRAPHICS\/final_mode1.png/figure12b.png/" paper-hierarchical.tex -i
 
 # figure 13
-cp GRAPHICS/metrology.eps ./figure13.eps
-sed -e "s/GRAPHICS\/metrology.eps/figure13.eps/" paper-hierarchical.tex -i
-#sed -e "s/pictures\/ap_occupation.eps/figure6a.pdf/" paper-hierarchical.tex -i
-#sed -e "s/pictures\/ap_spectral_density_fraction.eps/figure6b.pdf/" paper-hierarchical.tex -i
-#
+cp GRAPHICS/metrology-eps-converted-to.pdf ./figure13.pdf
+sed -e "s/GRAPHICS\/metrology.eps/figure13.pdf/" paper-hierarchical.tex -i
 
 rm -rf GRAPHICS
 
