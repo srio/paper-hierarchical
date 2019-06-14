@@ -23,6 +23,8 @@ cp paper-hierarchical.tex paper-hierarchical.tex.orig
 
 # biblio
 # sed -e "s.^\\\\bibliography{references}.\\\\input{paper-hierarchical\.bbl}." paper-hierarchical.tex -i
+pdflatex paper-hierarchical.tex
+bibtex paper-hierarchical
 sed -e "s.\\\\bibliographystyle.\\% \\\\bibliographystyle.g" paper-hierarchical.tex -i
 sed -e "s.^\\\\bibliography{references}.\\% \\\\bibliography{references}." paper-hierarchical.tex -i
 sed -e "s.^\\\\end{document}.\\% \\\\end{document}." paper-hierarchical.tex -i
