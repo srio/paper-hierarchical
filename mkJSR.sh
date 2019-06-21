@@ -7,9 +7,9 @@
 #
 
 cd /users/srio/Working/paper-hierarchical
-rm -rf ARXIV2 ARXIV
-mkdir ARXIV
-cd ARXIV
+rm -rf JSR JSR
+mkdir JSR
+cd JSR
 cp ../paper-hierarchical.tex .
 #cp ../paper-hierarchical.bbl .
 cp ../iucr.cls .
@@ -97,8 +97,8 @@ sed -e "s/GRAPHICS\/final_mode0.png/figure12a.png/" paper-hierarchical.tex -i
 sed -e "s/GRAPHICS\/final_mode1.png/figure12b.png/" paper-hierarchical.tex -i
 
 # figure 13
-cp GRAPHICS/metrology-eps-converted-to.pdf ./figure13.pdf
-sed -e "s/GRAPHICS\/metrology.eps/figure13.pdf/" paper-hierarchical.tex -i
+cp GRAPHICS/metrology.pdf ./figure13.pdf
+sed -e "s/GRAPHICS\/metrology.pdf/figure13.pdf/" paper-hierarchical.tex -i
 
 rm -rf GRAPHICS
 
