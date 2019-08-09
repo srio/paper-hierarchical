@@ -102,6 +102,8 @@ sed -e "s/GRAPHICS\/metrology.pdf/figure13.pdf/" paper-hierarchical.tex -i
 
 rm -rf GRAPHICS
 
+sed -e "s/documentclass/documentclass[preprint]/" paper-hierarchical.tex -i
+
 pdflatex paper-hierarchical.tex
 pdflatex paper-hierarchical.tex
 okular paper-hierarchical.pdf
